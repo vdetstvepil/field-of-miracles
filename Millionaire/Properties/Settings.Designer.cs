@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Field_of_miracles.Properties
+namespace Millionaire.Properties
 {
 
 
