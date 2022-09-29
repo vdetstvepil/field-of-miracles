@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="1080" Width="1920"
+        Background="#09090C"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" WindowState="Maximized" ResizeMode="NoResize">
         
+    <Grid>
+        <Image Source="/bg.png" Stretch="Fill" />
+        <DockPanel>
+            <Frame x:Name="_mainFrame" />
+            
+        </DockPanel>
     </Grid>
 </Window>
