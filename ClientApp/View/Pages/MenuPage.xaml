@@ -18,7 +18,7 @@
                 <Separator Opacity="0" Height="49"/>
                 <Button Style="{DynamicResource RoundButton}" Content="Статистика"   Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
                 <Separator Opacity="0" Height="85"/>
-                <Button Style="{DynamicResource RoundButton}" Content="Выйти"  Height="141" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
+                <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти"  Height="141" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="ExitBtn_Click"/>
             </StackPanel>
         </StackPanel>
 
