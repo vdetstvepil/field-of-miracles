@@ -23,6 +23,9 @@ namespace ClientApp
         public MainWindow()
         {
             InitializeComponent();
+            
+            // Переходим на страницу меню
+            _mainFrame.NavigationService.Navigate(new MenuPage());
         }
     }
 }
