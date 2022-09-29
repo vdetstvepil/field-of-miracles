@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Millionaire.Properties
+namespace ClientApp.Properties
 {
 
 

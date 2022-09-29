@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Millionaire
+namespace ClientApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
