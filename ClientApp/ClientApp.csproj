@@ -67,6 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\ViewModel.cs" />
+    <Compile Include="ViewModel\Pages\GamePageViewModel.cs" />
     <Compile Include="View\Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>

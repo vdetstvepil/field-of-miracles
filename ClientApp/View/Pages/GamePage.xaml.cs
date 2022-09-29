@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientApp.ViewModel.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace ClientApp
         public GamePage()
         {
             InitializeComponent();
+
+            // Присваиваем ссылку на ViewModel DataContext'у
+            DataContext = new GamePageViewModel();
         }
     }
 }
