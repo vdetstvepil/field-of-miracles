@@ -5,10 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClientApp"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1000" d:DesignWidth="1200"
       Title="MenuPage">
-
+    
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="/millionare.png" Width="303" Height="345" HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+            <Separator Opacity="0" Height="26"/>
+            <StackPanel Orientation="Vertical" Width="604" >
+                <Button Style="{DynamicResource RoundButton}" Content="Играть"  Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" />
+                <Separator Opacity="0" Height="49"/>
+                <Button Style="{DynamicResource RoundButton}" Content="Статистика"   Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
+                <Separator Opacity="0" Height="85"/>
+                <Button Style="{DynamicResource RoundButton}" Content="Выйти"  Height="141" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
+            </StackPanel>
+        </StackPanel>
+
+
     </Grid>
 </Page>

@@ -112,5 +112,11 @@
     <Folder Include="Resources\" />
     <Folder Include="View\GameControls\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="millionare.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
