@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace ClientApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuPage : Page
     {
-        public MainWindow()
+        public MenuPage()
         {
             InitializeComponent();
-            
-            // Переходим на страницу меню
-            _mainFrame.NavigationService.Navigate(new MenuPage());
         }
     }
 }
