@@ -55,8 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Command.cs" />
+    <Compile Include="Model\LambdaCommand.cs" />
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Variant.cs" />
+    <Compile Include="Model\VariantLetter.cs" />
     <Compile Include="View\Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
