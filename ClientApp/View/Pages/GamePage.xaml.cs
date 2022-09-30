@@ -1,4 +1,5 @@
-﻿using ClientApp.ViewModel.Pages;
+﻿using ClientApp.Model;
+using ClientApp.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,19 @@ namespace ClientApp
 
             // Присваиваем ссылку на ViewModel DataContext'у
             DataContext = new GamePageViewModel();
+        }
+
+        private void VariantBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Button)sender).Tag.ToString() == "A")
+                ((GamePageViewModel)DataContext).ChooseVariant(VariantLetter.A);
+            else if (((Button)sender).Tag.ToString() == "B")
+                ((GamePageViewModel)DataContext).ChooseVariant(VariantLetter.B);
+            else if (((Button)sender).Tag.ToString() == "C")
+                ((GamePageViewModel)DataContext).ChooseVariant(VariantLetter.C);
+            else if (((Button)sender).Tag.ToString() == "D")
+                ((GamePageViewModel)DataContext).ChooseVariant(VariantLetter.D);
+            else throw new Exception("No acceptable variant found");
         }
     }
 }

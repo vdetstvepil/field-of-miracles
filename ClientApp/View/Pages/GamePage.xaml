@@ -5,10 +5,95 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClientApp"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="1200"
       Title="GamePage">
 
     <Grid>
-        
+        <DockPanel LastChildFill="True">
+            <!-- Левая панель -->
+            <Grid DockPanel.Dock="Left" Width="300" Margin="0,50,0,50">
+                <!-- Фон панели -->
+                <Border BorderThickness="1" CornerRadius="0,20,20,0" Background="#4CFFFFFF"/>
+                <StackPanel Margin="10,50,10,50" >
+                    <!-- Количество очков -->
+                    <Grid Width="250" Height="85" VerticalAlignment="Top"  HorizontalAlignment="Center">
+                        <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
+                        <Label Content="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
+                    </Grid>
+                    <Separator Opacity="0" Height="50"/>
+                    <!-- Опция "50/50" -->
+                    <Button Style="{DynamicResource CircleButton}" Content="50:50" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
+                    <Separator Opacity="0" Height="10"/>
+                    <!-- Опция "Право на ошибку" -->
+                    <Button Style="{DynamicResource CircleButton}" Content="×2" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
+                </StackPanel>
+                <!-- Кнопка "Выйти" -->
+                <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти" Height="85" Width="184" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50"/>
+            </Grid>
+            <!-- Правая панель -->
+            <Grid DockPanel.Dock="Right" Width="300" Margin="0,50,0,50">
+                <Border BorderThickness="1" CornerRadius="20,0,0,20" Background="#4CFFFFFF"/>
+                <!-- Уровни -->
+                <ItemsControl x:Name="LevelStack" ItemsSource="{Binding LevelItems}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" Margin="20,50,20,50"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Label Content="{Binding Number}" Foreground="{Binding ItemColor}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
+                                <Label Content="{Binding Sum}" Foreground="{Binding ItemColor}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+            <!-- Центральная панель -->
+            <Grid Margin="100,100,100,98">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Вопрос -->
+                    <Grid Width="800" Height="300" VerticalAlignment="Top"  HorizontalAlignment="Center">
+                        <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
+                        <TextBlock Text="Вопрос" TextWrapping="Wrap" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <Separator Opacity="0" Height="50"/>
+                    <!-- Варианты ответа -->
+                    <ItemsControl x:Name="VariantsGrid" ItemsSource="{Binding VariantItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Grid.Row" Value="{Binding RowNumber}" />
+                                <Setter Property="Grid.Column" Value="{Binding ColumnNumber}" />
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Style="{DynamicResource RoundButton}" Content="{Binding Content}" Height="85" Margin="5,5,5,5" Background="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" 
+                                        Foreground="White" FontSize="48" Tag="{Binding LetterText}" FontFamily="Bahnschrift SemiBold" Click="VariantBtn_Click" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Separator Opacity="0" Height="20"/>
+                    <!-- Кнопка "Ответить" -->
+                    <Button Style="{DynamicResource RoundButton}" Content="Ответить" Height="85" Margin="50,5,50,5" 
+                                        Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Background="#4C8BFF55" />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Page>
