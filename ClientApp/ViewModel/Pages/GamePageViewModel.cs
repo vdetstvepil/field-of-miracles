@@ -5,10 +5,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ClientApp.ViewModel.Pages
 {
-    internal class GamePageViewModel
+    internal class GamePageViewModel : Model.ViewModel
     {
         private int _score = 0;
         private int _currentLevel = 0;
@@ -37,13 +39,29 @@ namespace ClientApp.ViewModel.Pages
         };
         private ObservableCollection<Variant> _variantItems = new ObservableCollection<Variant>()
         {
-           new Variant('A', "Ответ А"),
-           new Variant('B', "Ответ B"),
-           new Variant('C', "Ответ C"),
-           new Variant('D', "Ответ D", true),
+           new Variant(VariantLetter.A, "Ответ А"),
+           new Variant(VariantLetter.B, "Ответ B"),
+           new Variant(VariantLetter.C, "Ответ C"),
+           new Variant(VariantLetter.D, "Ответ D", true),
         };
 
+        public GamePageViewModel()
+        {
+            OnPropertyChanged("ItemColor");
+        }
 
+        /// <summary>
+        /// Выбрать вариант ответа
+        /// </summary>
+        /// <param name="letter">Выбранный вариант</param>
+        public void ChooseVariant(VariantLetter letter)
+        {
+            foreach (var item in _variantItems)
+                if (item.Letter == letter)
+                    item.IsChecked = true;
+                else item.IsChecked = false;
+        }
+     
 
         // Список вариантов ответа
         public List<string> AnswerVariantItems { get; set; }

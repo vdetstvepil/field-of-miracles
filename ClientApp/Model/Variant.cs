@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace ClientApp.Model
@@ -10,7 +11,7 @@ namespace ClientApp.Model
     internal class Variant : ViewModel
     {
         private string _content;
-        private char _letter;
+        private VariantLetter _letter;
         private bool _isChecked = false;
         private bool _isVisible = true;
         private bool _isTrue;
@@ -24,12 +25,28 @@ namespace ClientApp.Model
         /// <summary>
         /// Буква варианта
         /// </summary>
-        public char Letter { get { return _letter; } }
+        public VariantLetter Letter { get { return _letter; } }
+
+        /// <summary>
+        /// Буква варианта
+        /// </summary>
+        public string LetterText { get { return _letter.ToString(); } }
 
         /// <summary>
         /// Выбранный ответ
         /// </summary>
-        public bool IsChecked { get => _isChecked; set => _isChecked = value; }
+        public bool IsChecked 
+        { 
+            get => _isChecked; 
+            set
+            {
+                if (value == true)
+                    SetItemColor("#4CFFEA00");
+                else
+                    SetItemColor("#4CFFFFFF");
+                _isChecked = value;
+            } 
+        }
 
         /// <summary>
         /// Видимость варианта ответа
@@ -56,6 +73,7 @@ namespace ClientApp.Model
         public void SetItemColor(string color)
         {
             ItemColor = (Brush)new BrushConverter().ConvertFrom(color);
+            OnPropertyChanged("ItemColor");
         }
 
         /// <summary>
@@ -65,9 +83,9 @@ namespace ClientApp.Model
         { 
             get
             {
-                if (Letter == 'A' || Letter == 'B')
+                if (Letter == VariantLetter.A || Letter == VariantLetter.B)
                     return 0;
-                else if (Letter == 'C' || Letter == 'D')
+                else if (Letter == VariantLetter.C || Letter == VariantLetter.D)
                     return 1;
                 else 
                     throw new Exception("Wrong letter");
@@ -81,16 +99,16 @@ namespace ClientApp.Model
         {
             get
             {
-                if (Letter == 'A' || Letter == 'C')
+                if (Letter == VariantLetter.A || Letter == VariantLetter.C)
                     return 0;
-                else if (Letter == 'B' || Letter == 'D')
+                else if (Letter == VariantLetter.B || Letter == VariantLetter.D)
                     return 1;
                 else
                     throw new Exception("Wrong letter");
             }
         }
 
-        public Variant(char letter, string content, bool isTrue = false)
+        public Variant(VariantLetter letter, string content, bool isTrue = false)
         {
             _letter = letter;
             _content = content;

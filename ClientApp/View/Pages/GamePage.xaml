@@ -56,7 +56,7 @@
                     <!-- Вопрос -->
                     <Grid Width="800" Height="300" VerticalAlignment="Top"  HorizontalAlignment="Center">
                         <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
-                        <Label Content="Вопрос" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
+                        <TextBlock Text="Вопрос" TextWrapping="Wrap" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <Separator Opacity="0" Height="50"/>
                     <!-- Варианты ответа -->
@@ -83,11 +83,15 @@
                         </ItemsControl.ItemContainerStyle>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Button Style="{DynamicResource RoundButton}" Content="{Binding Content}" Height="85" Margin="5,5,5,5" Background="{Binding ItemColor}" 
-                                        Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
+                                <Button Style="{DynamicResource RoundButton}" Content="{Binding Content}" Height="85" Margin="5,5,5,5" Background="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" 
+                                        Foreground="White" FontSize="48" Tag="{Binding LetterText}" FontFamily="Bahnschrift SemiBold" Click="VariantBtn_Click" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                    <Separator Opacity="0" Height="20"/>
+                    <!-- Кнопка "Ответить" -->
+                    <Button Style="{DynamicResource RoundButton}" Content="Ответить" Height="85" Margin="50,5,50,5" 
+                                        Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Background="#4C8BFF55" />
                 </StackPanel>
             </Grid>
         </DockPanel>
