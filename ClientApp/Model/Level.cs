@@ -27,12 +27,26 @@ namespace ClientApp.Model
         /// <summary>
         /// Несгораемая сумма
         /// </summary>
-        public bool IsFireproof { get => _isFireProof; set => _isFireProof = value; }
+        public bool IsFireproof { 
+            get => _isFireProof; 
+            set
+            {
+                _isFireProof = value;
+                OnPropertyChanged("ItemColor");
+            }
+        }
 
         /// <summary>
         /// Текущий уровень
         /// </summary>
-        public bool IsCurrent { get => _isCurrent; set => _isCurrent = value; }
+        public bool IsCurrent { 
+            get => _isCurrent; 
+            set
+            {
+                _isCurrent = value;
+                OnPropertyChanged("ItemColor");
+            }
+        }
 
         /// <summary>
         /// Цвет текста
@@ -59,8 +73,5 @@ namespace ClientApp.Model
             _number = number.ToString();
             _sum = sum.ToString();
         }
-
-
-
     }
 }

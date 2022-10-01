@@ -51,5 +51,10 @@ namespace ClientApp
         {
             _frame.NavigationService.GoBack();
         }
+
+        private void AnswerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ((GamePageViewModel)DataContext).AnswerQuestion();
+        }
     }
 }

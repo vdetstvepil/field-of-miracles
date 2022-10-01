@@ -54,8 +54,10 @@ namespace ClientApp.ViewModel.Pages
         public GamePageViewModel()
         {
             OnPropertyChanged("ItemColor");
+            OnPropertyChanged("Question");
 
             Questions = GenerateQuestionList("questions.db");
+            CurrentLevel = 1;
         }
 
         /// <summary>
@@ -134,6 +136,46 @@ namespace ClientApp.ViewModel.Pages
                 else item.IsChecked = false;
         }
 
+        /// <summary>
+        /// Окончательно ответить на вопрос
+        /// </summary>
+        public void AnswerQuestion()
+        {
+            foreach (Variant item in VariantItems)
+                if (item.IsChecked == true)
+                {
+                    if (item.IsTrue)
+                        CurrentLevel++;
+                    else
+                    {
+                        // Проиграли. Сделать соответствующее уведомление / экран
+                        MessageBox.Show("Ответ неверный");
+                    }
+                    break;
+                }
+        }
+
+        private void LoadQuestion()
+        {
+            // Выводим вопрос на экран
+            Question = Questions[CurrentLevel].Content;
+            OnPropertyChanged("Question");
+
+            // Выводим варианты
+            VariantItems.Clear();
+            foreach (Variant item in Questions[CurrentLevel].Variants)
+                VariantItems.Add(item);
+
+            // Выделяем текущий уровень
+            foreach (Level item in LevelItems)
+                item.IsCurrent = false;
+            LevelItems[15 - CurrentLevel].IsCurrent = true;
+            OnPropertyChanged("ItemColor");
+
+            // Показываем текущую сумму
+            Score = Convert.ToInt32(LevelItems[15 - CurrentLevel].Sum);
+        }
+       
 
         // Список вариантов ответа
         public List<string> AnswerVariantItems { get; set; }
@@ -154,7 +196,23 @@ namespace ClientApp.ViewModel.Pages
         public int Score { get => _score; set => _score = value; }
 
         // Текущая ступень
-        public int CurrentLevel { get => _currentLevel; set => _currentLevel = value; }
+        public int CurrentLevel 
+        { 
+            get => _currentLevel; 
+            set
+            {
+                if (value > 0 || value < 15)
+                {
+                    _currentLevel = value;
+                    LoadQuestion();
+                }
+                if (value == 15)
+                {
+                    // Победа
+                    // Сделать соответствующий экран / уведомление
+                }
+            }  
+        }
 
         // Право на ошибку
         public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
