@@ -2,7 +2,7 @@
 --- Используется СУБД SQLite
 
 --- Создание таблицы списка вопросов
-CREATE TABLE questions (
+CREATE VIRTUAL TABLE questions (
 	id INTEGER AUTOINCREMENT PRIMARY KEY, 
 	level_number INTEGER,
 	question_text VARCHAR(1000), 
