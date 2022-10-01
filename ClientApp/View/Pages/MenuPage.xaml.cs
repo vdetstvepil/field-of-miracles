@@ -20,15 +20,23 @@ namespace ClientApp
     /// </summary>
     public partial class MenuPage : Page
     {
-        public MenuPage()
+        private Frame _frame;
+
+        public MenuPage(Frame frame)
         {
             InitializeComponent();
+            _frame = frame;
         }
 
         // Выход из приложения
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void PlayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.Navigate(new GamePage(_frame));
         }
     }
 }

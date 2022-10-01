@@ -14,7 +14,7 @@
                    VerticalAlignment="Center"/>
             <Separator Opacity="0" Height="26"/>
             <StackPanel Orientation="Vertical" Width="604" >
-                <Button Style="{DynamicResource RoundButton}" Content="Играть"  Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" />
+                <Button x:Name="PlayBtn" Style="{DynamicResource RoundButton}" Content="Играть"  Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="PlayBtn_Click" />
                 <Separator Opacity="0" Height="49"/>
                 <Button Style="{DynamicResource RoundButton}" Content="Статистика"   Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
                 <Separator Opacity="0" Height="85"/>

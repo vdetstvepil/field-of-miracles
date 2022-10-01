@@ -6,3 +6,17 @@ CREATE TABLE questions (id INTEGER PRIMARY KEY, level_number INTEGER, question_t
 
 --- Вставка вопросов в таблицу
 INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (1, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (2, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (3, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (4, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (5, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (6, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (7, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (8, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (9, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (10, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (11, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (12, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (13, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (14, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');
+INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (15, 'Тестовый вопрос', 'Ответ A', 'Ответ B', 'Ответ C', 'Ответ D', 'A');

@@ -18,7 +18,7 @@
                     <!-- Количество очков -->
                     <Grid Width="250" Height="85" VerticalAlignment="Top"  HorizontalAlignment="Center">
                         <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
-                        <Label Content="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
+                        <Label Content="{Binding Score}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
                     </Grid>
                     <Separator Opacity="0" Height="50"/>
                     <!-- Опция "50/50" -->
@@ -28,7 +28,7 @@
                     <Button Style="{DynamicResource CircleButton}" Content="×2" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
                 </StackPanel>
                 <!-- Кнопка "Выйти" -->
-                <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти" Height="85" Width="184" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50"/>
+                <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти" Height="85" Width="184" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" Click="ExitBtn_Click"/>
             </Grid>
             <!-- Правая панель -->
             <Grid DockPanel.Dock="Right" Width="300" Margin="0,50,0,50">
@@ -43,8 +43,8 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
-                                <Label Content="{Binding Number}" Foreground="{Binding ItemColor}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
-                                <Label Content="{Binding Sum}" Foreground="{Binding ItemColor}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                                <Label Content="{Binding Number}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
+                                <Label Content="{Binding Sum}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                             </DockPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -56,7 +56,7 @@
                     <!-- Вопрос -->
                     <Grid Width="800" Height="300" VerticalAlignment="Top"  HorizontalAlignment="Center">
                         <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
-                        <TextBlock Text="Вопрос" TextWrapping="Wrap" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Question, Mode=Default, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
                     <Separator Opacity="0" Height="50"/>
                     <!-- Варианты ответа -->
@@ -90,8 +90,8 @@
                     </ItemsControl>
                     <Separator Opacity="0" Height="20"/>
                     <!-- Кнопка "Ответить" -->
-                    <Button Style="{DynamicResource RoundButton}" Content="Ответить" Height="85" Margin="50,5,50,5" 
-                                        Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Background="#4C8BFF55" />
+                    <Button x:Name="AnswerBtn" Style="{DynamicResource RoundButton}" Content="Ответить" Height="85" Margin="50,5,50,5" 
+                                        Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Background="#4C8BFF55" Click="AnswerBtn_Click" />
                 </StackPanel>
             </Grid>
         </DockPanel>

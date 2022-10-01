@@ -8,13 +8,13 @@ using System.Windows.Media;
 
 namespace ClientApp.Model
 {
-    internal class Variant : ViewModel
+    public class Variant : ViewModel
     {
         private string _content;
         private VariantLetter _letter;
         private bool _isChecked = false;
         private bool _isVisible = true;
-        private bool _isTrue;
+        private bool _isTrue = false;
         private Brush _itemColor = null;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace ClientApp.Model
         /// </summary>
         public string Content { get { return _content; } }
 
-        /// <summary>
+        /// <summary>   
         /// Буква варианта
         /// </summary>
         public VariantLetter Letter { get { return _letter; } }
