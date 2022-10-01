@@ -158,12 +158,12 @@ namespace ClientApp.ViewModel.Pages
         private void LoadQuestion()
         {
             // Выводим вопрос на экран
-            Question = Questions[CurrentLevel].Content;
+            Question = Questions[CurrentLevel - 1].Content;
             OnPropertyChanged("Question");
 
             // Выводим варианты
             VariantItems.Clear();
-            foreach (Variant item in Questions[CurrentLevel].Variants)
+            foreach (Variant item in Questions[CurrentLevel - 1].Variants)
                 VariantItems.Add(item);
 
             // Выделяем текущий уровень
@@ -201,7 +201,7 @@ namespace ClientApp.ViewModel.Pages
             get => _currentLevel; 
             set
             {
-                if (value > 0 || value < 15)
+                if (value > 0 && value < 15)
                 {
                     _currentLevel = value;
                     LoadQuestion();
