@@ -40,8 +40,8 @@ namespace UnitTests
             SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
 
             string result = Convert.ToString(
-                ClientApp.Services.DatabaseHandler.SelectQuery(ref connection, 
-                @"SELECT question_text WHERE id == 1;"));
+                ClientApp.Services.DatabaseHandler.SelectQuery(ref connection,
+               "questions", "question_text", "id == 1")[0]);
 
             Assert.AreEqual("Тестовый вопрос", result);
         }
@@ -53,7 +53,7 @@ namespace UnitTests
 
             string result = Convert.ToString(
                 ClientApp.Services.DatabaseHandler.SelectQuery(ref connection,
-                @"SELECT variant_A WHERE id == 1;"));
+               "questions", "variant_a", "id == 1")[0]);
 
             Assert.AreEqual("Ответ A", result);
         }

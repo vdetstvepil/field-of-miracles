@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace ClientApp.Services
 {
@@ -113,9 +114,48 @@ namespace ClientApp.Services
         /// </summary>
         /// <param name="query">Строка единичного запроса</param>
         /// <returns></returns>
-        public static object SelectQuery(ref SQLiteConnection connection, string query)
+        public static List<object> SelectQuery(ref SQLiteConnection connection, string table, string field, params string[] condition)
         {
-            return null;
+            ConnectionOpen(ref connection);
+
+            // Строим строку запроса
+            StringBuilder commandBuilder = new StringBuilder();
+            commandBuilder.Append($"SELECT {field} FROM {table}");
+            if (condition.Length != 0)
+            {
+                commandBuilder.Append(" WHERE ");
+                foreach (string conditionValue in condition)
+                    commandBuilder.Append(conditionValue).Append(" AND ");
+                commandBuilder.Remove(commandBuilder.Length - 4, 3);
+            }
+
+            // Команда запроса
+            SQLiteCommand command = new SQLiteCommand(commandBuilder.ToString(), connection);
+
+            // Объявляем переменную чтения возвращаемого
+            // потока данных (ридер)
+            SQLiteDataReader reader;
+
+            // Выполняем запрос и заливаем весь возвращаемый
+            // поток данных в ридер
+            reader = command.ExecuteReader();
+
+            // Список возвращаемых величин
+            List<object> listOfValues = new List<object>();
+
+            // Вытягиваем данные из ридера до тех пор,
+            // пока ридер не останется пустым
+            while (reader.Read()) 
+            {
+                // В квадратных скобках пишем названия полей
+                // таблицы таким же образом, как они указаны в запросе
+                listOfValues.Add(reader[$"{field}"]);
+            }
+            reader.Close(); //закрываем ридер
+
+            ConnectionClose(ref connection);
+
+            return listOfValues;
         }
     }
 }
