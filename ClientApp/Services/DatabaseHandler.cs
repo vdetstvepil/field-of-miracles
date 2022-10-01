@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,24 @@ namespace ClientApp.Services
         {
             if (Connection != null)
                 Connection.Close();
+        }
+        
+        /// <summary>
+        /// Выполнение запроса
+        /// </summary>
+        /// <param name="query">Файл запросов</param>
+        public static void RunQueryFromFile(string path)
+        {
+            
+        }
+
+        /// <summary>
+        /// Выполнение запроса
+        /// </summary>
+        /// <param name="query">Строка единичного запроса</param>
+        public static void RunQuery(string query)
+        {
+            
         }
     }
 }
