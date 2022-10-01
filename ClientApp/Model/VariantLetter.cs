@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Model
 {
-    internal enum VariantLetter
+    public enum VariantLetter
     {
         A,
         B,

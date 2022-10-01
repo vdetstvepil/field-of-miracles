@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace ClientApp.Model
 {
-    internal class Level : ViewModel
+    public class Level : ViewModel
     {
         private string _number;
         private string _sum;

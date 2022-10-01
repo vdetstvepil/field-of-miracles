@@ -25,7 +25,7 @@ namespace ClientApp
             InitializeComponent();
             
             // Переходим на страницу меню
-            _mainFrame.NavigationService.Navigate(new GamePage());
+            _mainFrame.NavigationService.Navigate(new MenuPage(_mainFrame));
         }
     }
 }

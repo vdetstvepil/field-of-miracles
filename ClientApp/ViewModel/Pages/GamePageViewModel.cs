@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ClientApp.ViewModel.Pages
 {
-    internal class GamePageViewModel : Model.ViewModel
+    public class GamePageViewModel : Model.ViewModel
     {
         private int _score = 0;
         private int _currentLevel = 0;
@@ -44,10 +44,23 @@ namespace ClientApp.ViewModel.Pages
            new Variant(VariantLetter.C, "Ответ C"),
            new Variant(VariantLetter.D, "Ответ D", true),
         };
+        List<Question> _questions = new List<Question>();
+        
 
         public GamePageViewModel()
         {
             OnPropertyChanged("ItemColor");
+
+            Questions = GenerateQuestionList("questions.db");
+        }
+
+        /// <summary>
+        /// Генерирование списка вопросов для текущей игры
+        /// </summary>
+        /// <returns></returns>
+        public List<Question> GenerateQuestionList(string fileName)
+        {
+            return null;
         }
 
         /// <summary>
@@ -92,5 +105,8 @@ namespace ClientApp.ViewModel.Pages
 
         // Несгораемая сумма
         public int FireproofAmount { get => _fireproofAmount; set => _fireproofAmount = value; }
+        
+        // Список вопросов
+        public List<Question> Questions { get => _questions; set => _questions = value; }
     }
 }

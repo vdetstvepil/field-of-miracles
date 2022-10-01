@@ -22,12 +22,16 @@ namespace ClientApp
     /// </summary>
     public partial class GamePage : Page
     {
-        public GamePage()
+        private Frame _frame;
+
+        public GamePage(Frame frame)
         {
             InitializeComponent();
 
             // Присваиваем ссылку на ViewModel DataContext'у
             DataContext = new GamePageViewModel();
+
+            _frame = frame;
         }
 
         private void VariantBtn_Click(object sender, RoutedEventArgs e)
@@ -41,6 +45,11 @@ namespace ClientApp
             else if (((Button)sender).Tag.ToString() == "D")
                 ((GamePageViewModel)DataContext).ChooseVariant(VariantLetter.D);
             else throw new Exception("No acceptable variant found");
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.GoBack();
         }
     }
 }

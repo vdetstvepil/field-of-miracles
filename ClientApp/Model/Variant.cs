@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace ClientApp.Model
 {
-    internal class Variant : ViewModel
+    public class Variant : ViewModel
     {
         private string _content;
         private VariantLetter _letter;
