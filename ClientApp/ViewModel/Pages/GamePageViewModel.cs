@@ -1,8 +1,12 @@
 ﻿using ClientApp.Model;
+using ClientApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,7 +49,7 @@ namespace ClientApp.ViewModel.Pages
            new Variant(VariantLetter.D, "Ответ D", true),
         };
         List<Question> _questions = new List<Question>();
-        
+
 
         public GamePageViewModel()
         {
@@ -58,9 +62,64 @@ namespace ClientApp.ViewModel.Pages
         /// Генерирование списка вопросов для текущей игры
         /// </summary>
         /// <returns></returns>
-        public List<Question> GenerateQuestionList(string fileName)
+        public static List<Question> GenerateQuestionList(string fileName)
         {
-            return null;
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
+
+            // Рандомайзер
+            Random random = new Random();
+
+            // Список вопросов
+            List<Question> questions = new List<Question>();
+
+            for (int i = 1; i <= 15; i++)
+            {
+                // Берем рандомный вопрос по уровню
+                List<object> questionContentItems =
+                    DatabaseHandler.SelectQuery(ref connection, "questions", "id", $"level_number == {i}");
+                int questionId = Convert.ToInt32(questionContentItems[random.Next(0, questionContentItems.Count)]);
+                string temp = Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_true", $"id == {questionId}")[0]);
+                questions.Add(
+                    new Question(
+                    i,
+                    Convert.ToString(DatabaseHandler.SelectQuery(
+                        ref connection, "questions", "question_text", $"id == {questionId}")[0]),
+                    new List<Variant>()
+                    {
+                        new Variant(
+                            VariantLetter.A,
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_a", $"id == {questionId}")[0]),
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_true", $"id == {questionId}")[0]) == "A"
+                                ? true : false),
+                        new Variant(
+                            VariantLetter.B,
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_b", $"id == {questionId}")[0]),
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_true", $"id == {questionId}")[0]) == "B"
+                                ? true : false),
+                        new Variant(
+                            VariantLetter.C,
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_c", $"id == {questionId}")[0]),
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_true", $"id == {questionId}")[0]) == "C"
+                                ? true : false),
+                        new Variant(
+                            VariantLetter.D,
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_d", $"id == {questionId}")[0]),
+                            Convert.ToString(DatabaseHandler.SelectQuery(
+                                ref connection, "questions", "variant_true", $"id == {questionId}")[0]) == "D"
+                                ? true : false),
+                    })
+                );
+            }
+
+            return questions;
         }
 
         /// <summary>
@@ -74,7 +133,7 @@ namespace ClientApp.ViewModel.Pages
                     item.IsChecked = true;
                 else item.IsChecked = false;
         }
-     
+
 
         // Список вариантов ответа
         public List<string> AnswerVariantItems { get; set; }
@@ -105,7 +164,7 @@ namespace ClientApp.ViewModel.Pages
 
         // Несгораемая сумма
         public int FireproofAmount { get => _fireproofAmount; set => _fireproofAmount = value; }
-        
+
         // Список вопросов
         public List<Question> Questions { get => _questions; set => _questions = value; }
     }

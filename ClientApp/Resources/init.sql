@@ -2,7 +2,7 @@
 --- Используется СУБД SQLite
 
 --- Создание таблицы списка вопросов
-CREATE VIRTUAL TABLE questions (id INTEGER AUTOINCREMENT PRIMARY KEY, level_number INTEGER, question_text VARCHAR(1000), variant_a VARCHAR(200), variant_b VARCHAR(200), variant_c VARCHAR(200), variant_d VARCHAR(200), variant_true VARCHAR(1));
+CREATE TABLE questions (id INTEGER AUTOINCREMENT PRIMARY KEY, level_number INTEGER, question_text VARCHAR(1000), variant_a VARCHAR(200), variant_b VARCHAR(200), variant_c VARCHAR(200), variant_d VARCHAR(200), variant_true VARCHAR(1));
 
 --- Вставка вопросов в таблицу
 INSERT INTO questions (level_number, question_text, variant_a, variant_b, variant_c, variant_d, variant_true) VALUES (1, 'Чему равен периметр ромба со стороной 2 м?', '4 метра', '6 литров', '8 метров квадратных', '8 метров', 'D');
