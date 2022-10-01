@@ -123,7 +123,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="View\GameControls\" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="millionare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\test-init.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
