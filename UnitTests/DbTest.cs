@@ -13,6 +13,11 @@ namespace UnitTests
                 "Connection to memory failed");
 
         [TestMethod]
+        public void CreateDBFileTest() =>
+          Assert.IsTrue(ClientApp.Services.DatabaseHandler.CreateDBFile(@"test.db"),
+              "Test DB file not created");
+
+        [TestMethod]
         public void RunQueryTest() =>
             Assert.IsTrue(ClientApp.Services.DatabaseHandler.RunQueryFromFile(@"Resources/test-init.sql"),
                 "Test query failed to run");

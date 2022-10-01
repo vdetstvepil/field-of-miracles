@@ -15,18 +15,32 @@ namespace ClientApp.Services
         /// Подключение к базе данных
         /// </summary>
         public static SQLiteConnection Connection { get; set; }
-        
+
         /// <summary>
         /// Инициировать подключение к базе данных
         /// </summary>
-        public static bool ConnectionOpen()
+        /// <param name="path">Путь к файлу БД</param>
+        /// <returns></returns>
+        public static bool ConnectionOpen(string path = null)
         {
-            Connection = new SQLiteConnection($"Data Source=:memory:; Version=3;");
+            if (path == null)
+                Connection = new SQLiteConnection($"Data Source=:memory:; Version=3;");
+            else 
+                Connection = new SQLiteConnection($"Data Source={path}; Version=3;");
             Connection.Open();
 
             if (Connection.State == ConnectionState.Open)
                 return true;
             else return false;
+        }
+
+        /// <summary>
+        /// Создание базы данных в файле
+        /// </summary>
+        /// <returns></returns>
+        public static bool CreateDBFile(string fileName)
+        {
+            return false;
         }
 
         /// <summary>
@@ -59,7 +73,7 @@ namespace ClientApp.Services
         /// <summary>
         /// Запрос SELECT
         /// </summary>
-        /// <param name="query">Возвращаемое значение</param>
+        /// <param name="query">Строка единичного запроса</param>
         /// <returns></returns>
         public static object SelectQuery(string query)
         {
