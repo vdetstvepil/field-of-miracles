@@ -39,7 +39,7 @@ namespace ClientApp.Services
         }
         
         /// <summary>
-        /// Выполнение запроса
+        /// Выполнение очереди запросов из файла
         /// </summary>
         /// <param name="query">Файл запросов</param>
         public static bool RunQueryFromFile(string path)
@@ -54,6 +54,16 @@ namespace ClientApp.Services
         public static bool RunQuery(string query)
         {
             return false;
+        }
+
+        /// <summary>
+        /// Запрос SELECT
+        /// </summary>
+        /// <param name="query">Возвращаемое значение</param>
+        /// <returns></returns>
+        public static object SelectQuery(string query)
+        {
+            return null;
         }
     }
 }

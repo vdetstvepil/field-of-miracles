@@ -144,7 +144,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="View\GameControls\" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +151,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="millionare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\init.sql">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
