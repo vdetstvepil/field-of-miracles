@@ -4,8 +4,12 @@ using System;
 namespace UnitTests
 {
     [TestClass]
-    public class LevelChangeTest
+    public class DbTest
     {
-        
+        [TestMethod]
+        public void TestMethod1()
+        {
+            
+        }
     }
 }
