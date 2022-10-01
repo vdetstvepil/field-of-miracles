@@ -42,18 +42,18 @@ namespace ClientApp.Services
         /// Выполнение запроса
         /// </summary>
         /// <param name="query">Файл запросов</param>
-        public static void RunQueryFromFile(string path)
+        public static bool RunQueryFromFile(string path)
         {
-            
+            return false;
         }
 
         /// <summary>
         /// Выполнение запроса
         /// </summary>
         /// <param name="query">Строка единичного запроса</param>
-        public static void RunQuery(string query)
+        public static bool RunQuery(string query)
         {
-            
+            return false;
         }
     }
 }
