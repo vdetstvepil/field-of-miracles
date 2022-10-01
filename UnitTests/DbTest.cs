@@ -1,62 +1,61 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ClientApp.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Data.SQLite;
+using System.Globalization;
+using System.IO;
 using System.Runtime.Versioning;
+using System.Security.Cryptography.X509Certificates;
 
 namespace UnitTests
 {
     [TestClass]
     public class DbTest
     {
-        [TestMethod]
-        public void ConnectionOpenTest() =>
-            Assert.IsTrue(ClientApp.Services.DatabaseHandler.ConnectionOpen(), 
-                "Connection to memory failed");
+        private const string fileName = "test.db";
 
         [TestMethod]
-        public void CreateDBFileTest() =>
-          Assert.IsTrue(ClientApp.Services.DatabaseHandler.CreateDBFile(@"test.db"),
-              "Test DB file not created");
+        public void CreateDBFileTest()
+        {
+            
+            bool result = ClientApp.Services.DatabaseHandler.CreateDBFile(fileName);
+
+            Assert.IsTrue(result, "Test DB file not created");
+        }
 
         [TestMethod]
-        public void RunQueryTest() =>
-            Assert.IsTrue(ClientApp.Services.DatabaseHandler.RunQueryFromFile(@"Resources/test-init.sql"),
-                "Test query failed to run");
+        public void RunQueryTest()
+        {
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
+
+            bool result = ClientApp.Services.DatabaseHandler.RunQueryFromFile(ref connection,
+                Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"/Resources/test-init.sql");
+
+            Assert.IsTrue(result, "Test query failed to run");
+        }
 
         [TestMethod]
-        public void SelectQueryTest1() =>
-            Assert.AreEqual(Convert.ToString(
-                ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT question_text WHERE id == 1;")),
-                "Тестовый вопрос");
+        public void SelectQueryTest1()
+        {
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
+
+            string result = Convert.ToString(
+                ClientApp.Services.DatabaseHandler.SelectQuery(ref connection,
+               "questions", "question_text", "id == 1")[0]);
+
+            Assert.AreEqual("Тестовый вопрос", result);
+        }
 
         [TestMethod]
-        public void SelectQueryTest2() =>
-            Assert.AreEqual(Convert.ToString(
-                ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT variant_a WHERE id == 1;")),
-                "Ответ A");
+        public void SelectQueryTest2()
+        {
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
 
-        [TestMethod]
-        public void SelectQueryTest3() =>
-           Assert.AreEqual(Convert.ToString(
-               ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT variant_b WHERE id == 1;")),
-               "Ответ B");
+            string result = Convert.ToString(
+                ClientApp.Services.DatabaseHandler.SelectQuery(ref connection,
+               "questions", "variant_a", "id == 1")[0]);
 
-        [TestMethod]
-        public void SelectQueryTest4() =>
-         Assert.AreEqual(Convert.ToString(
-             ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT variant_c WHERE id == 1;")),
-             "Ответ C");
-
-        [TestMethod]
-        public void SelectQueryTest5() =>
-         Assert.AreEqual(Convert.ToString(
-             ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT variant_d WHERE id == 1;")),
-             "Ответ D");
-
-
-        [TestMethod]
-        public void SelectQueryTest6() =>
-         Assert.AreEqual(Convert.ToString(
-             ClientApp.Services.DatabaseHandler.SelectQuery(@"SELECT variant_true WHERE id == 1;")),
-             "A");
+            Assert.AreEqual("Ответ A", result);
+        }
     }
 }
