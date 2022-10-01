@@ -7,9 +7,8 @@ namespace UnitTests
     public class DbTest
     {
         [TestMethod]
-        public void TestMethod1()
-        {
-            
-        }
+        public void ConnectionOpenTest() =>
+            Assert.IsTrue(ClientApp.Services.DatabaseHandler.ConnectionOpen(), 
+                "Connection to memory failed");
     }
 }

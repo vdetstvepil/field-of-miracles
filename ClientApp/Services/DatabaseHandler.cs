@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ClientApp.Services
 {
-    internal class DatabaseHandler
+    public class DatabaseHandler
     {
         /// <summary>
         /// Подключение к базе данных
@@ -18,10 +19,14 @@ namespace ClientApp.Services
         /// <summary>
         /// Инициировать подключение к базе данных
         /// </summary>
-        public static void ConnectionOpen()
+        public static bool ConnectionOpen()
         {
             Connection = new SQLiteConnection($"Data Source=:memory:; Version=3;");
             Connection.Open();
+
+            if (Connection.State == ConnectionState.Open)
+                return true;
+            else return false;
         }
 
         /// <summary>
