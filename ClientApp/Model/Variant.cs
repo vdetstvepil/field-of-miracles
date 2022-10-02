@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -13,7 +14,7 @@ namespace ClientApp.Model
         private string _content;
         private VariantLetter _letter;
         private bool _isChecked = false;
-        private bool _isVisible = true;
+        private Visibility _isVisible = Visibility.Visible;
         private bool _isTrue = false;
         private Brush _itemColor = null;
 
@@ -51,7 +52,15 @@ namespace ClientApp.Model
         /// <summary>
         /// Видимость варианта ответа
         /// </summary>
-        public bool IsVisible { get => _isVisible; set => _isVisible = value; }
+        public Visibility IsVisible 
+        { 
+            get => _isVisible; 
+            set
+            {
+                _isVisible = value;
+                OnPropertyChanged("IsVisible");
+            }
+        }
 
         /// <summary>
         /// Правильный ответ

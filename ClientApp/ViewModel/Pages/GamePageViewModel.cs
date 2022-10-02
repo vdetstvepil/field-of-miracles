@@ -175,6 +175,42 @@ namespace ClientApp.ViewModel.Pages
             // Показываем текущую сумму
             Score = Convert.ToInt32(LevelItems[15 - CurrentLevel].Sum);
         }
+
+        /// <summary>
+        /// Активировать подсказку 50:50
+        /// </summary>
+        public void RemoveTwoVariants()
+        {
+            foreach (Variant item in VariantItems)
+                item.IsChecked = false;
+
+            foreach (Variant item in VariantItems)
+                if (item.IsTrue)
+                {
+                    // Запоминаем правильный вариант
+                    Variant temp = item;
+                    VariantItems.Remove(temp);
+
+                    // Убираем первый неверный вариант
+                    Variant tempRemove1 = VariantItems[new Random().Next(0, 3)];
+                    tempRemove1.IsVisible = Visibility.Hidden;
+                    VariantItems.Remove(tempRemove1);
+
+                    // Убираем второй неверный вариант
+                    Variant tempRemove2 = VariantItems[new Random().Next(0, 2)];
+                    tempRemove2.IsVisible = Visibility.Hidden;
+                    VariantItems.Remove(tempRemove2);
+
+                    // Возвращаем варианты
+                    VariantItems.Add(temp);
+                    VariantItems.Add(tempRemove1);
+                    VariantItems.Add(tempRemove2);
+
+                    // Деактивируем опцию 50:50
+                    FiftyFifty = false;
+                    break;
+                }
+        }
        
 
         // Список вариантов ответа
@@ -193,7 +229,15 @@ namespace ClientApp.ViewModel.Pages
         public string Question { get => _question; set => _question = value; }
 
         // Количество очков
-        public int Score { get => _score; set => _score = value; }
+        public int Score 
+        { 
+            get => _score;
+            set
+            {
+                _score = value;
+                OnPropertyChanged("Score");
+            }
+        }
 
         // Текущая ступень
         public int CurrentLevel 
@@ -201,13 +245,14 @@ namespace ClientApp.ViewModel.Pages
             get => _currentLevel; 
             set
             {
-                if (value > 0 && value < 15)
+                if (value >= 1 && value <= 15)
                 {
                     _currentLevel = value;
                     LoadQuestion();
                 }
-                if (value == 15)
+                if (_currentLevel == 16)
                 {
+                    MessageBox.Show("Вы победили");
                     // Победа
                     // Сделать соответствующий экран / уведомление
                 }
@@ -218,7 +263,15 @@ namespace ClientApp.ViewModel.Pages
         public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
 
         // 50:50
-        public bool FiftyFifty { get => _fiftyFifty; set => _fiftyFifty = value; }
+        public bool FiftyFifty 
+        { 
+            get => _fiftyFifty; 
+            set
+            {
+                _fiftyFifty = value;
+                OnPropertyChanged("FiftyFifty");
+            }
+        }
 
         // Несгораемая сумма
         public int FireproofAmount { get => _fireproofAmount; set => _fireproofAmount = value; }
