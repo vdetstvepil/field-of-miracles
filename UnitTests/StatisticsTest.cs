@@ -20,10 +20,10 @@ namespace UnitTests
 
         private readonly ObservableCollection<StatisticsItem> StatisticsItems 
             = new ObservableCollection<StatisticsItem>() {
-            new StatisticsItem("Anton", 5000),
-            new StatisticsItem("Zhenek", 1500000),
             new StatisticsItem("Dashka", 3000000),
             new StatisticsItem("Margo", 3000000),
+            new StatisticsItem("Zhenek", 1500000),
+            new StatisticsItem("Anton", 5000),
             };
 
         private ObservableCollection<StatisticsItem> ActualStatisticsItems;
