@@ -56,5 +56,10 @@ namespace ClientApp
         {
             ((GamePageViewModel)DataContext).AnswerQuestion();
         }
+
+        private void FiftyFiftyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ((GamePageViewModel)DataContext).RemoveTwoVariants();
+        }
     }
 }

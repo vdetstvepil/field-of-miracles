@@ -22,7 +22,7 @@
                     </Grid>
                     <Separator Opacity="0" Height="50"/>
                     <!-- Опция "50/50" -->
-                    <Button Style="{DynamicResource CircleButton}" Content="50:50" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
+                    <Button x:Name="FiftyFiftyBtn" Style="{DynamicResource CircleButton}" Content="50:50" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="FiftyFiftyBtn_Click" IsEnabled="{Binding FiftyFifty, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
                     <Separator Opacity="0" Height="10"/>
                     <!-- Опция "Право на ошибку" -->
                     <Button Style="{DynamicResource CircleButton}" Content="×2" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
@@ -37,7 +37,7 @@
                 <ItemsControl x:Name="LevelStack" ItemsSource="{Binding LevelItems}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" Margin="20,50,20,50"/>
+                            <StackPanel Orientation="Vertical" Margin="20,20,20,20" VerticalAlignment="Center"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -84,7 +84,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Button Style="{DynamicResource RoundButton}" Content="{Binding Content}" Height="85" Margin="5,5,5,5" Background="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" 
-                                        Foreground="White" FontSize="48" Tag="{Binding LetterText}" FontFamily="Bahnschrift SemiBold" Click="VariantBtn_Click" />
+                                        Foreground="White" FontSize="48" Tag="{Binding LetterText}" FontFamily="Bahnschrift SemiBold" Click="VariantBtn_Click" Visibility="{Binding IsVisible, Mode=Default, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
