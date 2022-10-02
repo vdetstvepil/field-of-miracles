@@ -41,8 +41,8 @@ namespace ClientApp.ViewModel.Pages
             {
                 string name = DatabaseHandler.SelectQuery(ref connection,
                     "statistics_table", "nickname", $"id == {i}")[0].ToString();
-                int sum = Convert.ToInt32(DatabaseHandler.SelectQuery(ref connection, 
-                    "statistics_table", "score", $"id == {i}")[0]);
+                int sum = (int)DatabaseHandler.SelectQuery(ref connection, 
+                    "statistics_table", "score", $"id == {i}")[0];
                 list.Add(new StatisticsItem(name, sum));
             }
 
