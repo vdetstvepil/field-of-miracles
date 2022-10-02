@@ -37,7 +37,7 @@ namespace ClientApp.ViewModel.Pages
                 = new ObservableCollection<StatisticsItem>();
 
             // Выгрузка статистики из базы данных
-            for (int i = 0; i < count; i++)
+            for (int i = 1; i <= count; i++)
             {
                 string name = DatabaseHandler.SelectQuery(ref connection,
                     "statistics_table", "nickname", $"id == {i}")[0].ToString();
