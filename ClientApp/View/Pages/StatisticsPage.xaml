@@ -9,6 +9,38 @@
       Title="StatisticsPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Horizontal" Width="510" VerticalAlignment="Center" >
+            <!-- Уровни -->
+            <ItemsControl ItemsSource="{Binding StatisticsItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Width="200" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
+                            <Label Content="{Binding Name}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Separator Opacity="0" Width="2"/>
+            <!-- Уровни -->
+            <ItemsControl ItemsSource="{Binding StatisticsItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
+                            <Label Content="{Binding Sum}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </Page>
