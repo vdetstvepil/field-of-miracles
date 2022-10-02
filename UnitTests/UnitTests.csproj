@@ -69,6 +69,7 @@
     <Compile Include="DbTest.cs" />
     <Compile Include="LevelChangeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticsTest.cs" />
     <Compile Include="QuestionsTest.cs" />
   </ItemGroup>
   <ItemGroup>
