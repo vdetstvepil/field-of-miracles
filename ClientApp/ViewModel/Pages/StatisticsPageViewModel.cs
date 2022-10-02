@@ -17,7 +17,8 @@ namespace ClientApp.ViewModel.Pages
         /// <summary>
         /// Список элементов с именами и количеством очков
         /// </summary>
-        public ObservableCollection<StatisticsItem> StatisticsItems { get => _statisticsItems; set => _statisticsItems = value; }
+        public ObservableCollection<StatisticsItem> StatisticsItems { 
+            get => _statisticsItems; set => _statisticsItems = value; }
 
         /// <summary>
         /// Выгружает статистику из базы данных
@@ -32,21 +33,22 @@ namespace ClientApp.ViewModel.Pages
             int count = DatabaseHandler.SelectQuery(ref connection, "statistics", "id").Count;
 
             // Список всех элементов
-            ObservableCollection<StatisticsItem> list = new ObservableCollection<StatisticsItem>();
+            ObservableCollection<StatisticsItem> list 
+                = new ObservableCollection<StatisticsItem>();
 
             // Выгрузка статистики из базы данных
             for (int i = 0; i < count; i++)
             {
-                string name = DatabaseHandler.SelectQuery(ref connection, "statistics", "name", $"id == {i}")[0].ToString();
-                int sum = (int)DatabaseHandler.SelectQuery(ref connection, "statistics", "name", $"id == {i}")[0];
-                StatisticsItem item = new StatisticsItem(name, sum);
-                list.Add(item);
+                string name = DatabaseHandler.SelectQuery(ref connection,
+                    "statistics_table", "nickname", $"id == {i}")[0].ToString();
+                int sum = (int)DatabaseHandler.SelectQuery(ref connection, 
+                    "statistics_table", "score", $"id == {i}")[0];
+                list.Add(new StatisticsItem(name, sum));
             }
 
             // Сортировка по убыванию по количеству очков
-            ObservableCollection<StatisticsItem> sortedList = (ObservableCollection<StatisticsItem>)list.OrderByDescending(p => Convert.ToInt32(p.Sum));
-
-            return sortedList;
+            return (ObservableCollection<StatisticsItem>)list.OrderByDescending(
+                p => Convert.ToInt32(p.Sum));
         }
 
         /// <summary>
