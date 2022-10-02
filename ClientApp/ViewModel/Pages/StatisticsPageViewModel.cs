@@ -47,8 +47,8 @@ namespace ClientApp.ViewModel.Pages
             }
 
             // Сортировка по убыванию по количеству очков
-            return (ObservableCollection<StatisticsItem>)list.OrderByDescending(
-                p => Convert.ToInt32(p.Sum));
+            return new ObservableCollection<StatisticsItem>(list.OrderByDescending(
+                p => Convert.ToInt32(p.Sum)));
         }
 
         /// <summary>
