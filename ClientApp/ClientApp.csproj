@@ -82,6 +82,7 @@
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Variant.cs" />
     <Compile Include="Model\VariantLetter.cs" />
+    <Compile Include="ViewModel\Pages\StatisticsPageViewModel.cs" />
     <Compile Include="View\Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
