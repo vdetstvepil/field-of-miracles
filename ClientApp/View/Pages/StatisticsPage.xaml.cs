@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientApp.ViewModel.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace ClientApp.View.Pages
     /// </summary>
     public partial class StatisticsPage : Page
     {
-        public StatisticsPage()
+        private Frame _frame;
+
+        public StatisticsPage(Frame frame)
         {
             InitializeComponent();
+
+            // Присваиваем ссылку на ViewModel DataContext'у
+            DataContext = new StatisticsPageViewModel();
+
+            _frame = frame;
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.GoBack();
         }
     }
 }

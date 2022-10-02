@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientApp.View.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,11 @@ namespace ClientApp
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
             _frame.NavigationService.Navigate(new GamePage(_frame));
+        }
+
+        private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.Navigate(new StatisticsPage(_frame));
         }
     }
 }

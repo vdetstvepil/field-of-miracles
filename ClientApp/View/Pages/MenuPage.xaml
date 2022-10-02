@@ -16,7 +16,7 @@
             <StackPanel Orientation="Vertical" Width="604" >
                 <Button x:Name="PlayBtn" Style="{DynamicResource RoundButton}" Content="Играть"  Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="PlayBtn_Click" />
                 <Separator Opacity="0" Height="49"/>
-                <Button Style="{DynamicResource RoundButton}" Content="Статистика"   Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold"/>
+                <Button x:Name="StatisticsBtn" Style="{DynamicResource RoundButton}" Content="Статистика"   Height="141" Background="#4CFFFFFF" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="StatisticsBtn_Click"/>
                 <Separator Opacity="0" Height="85"/>
                 <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти"  Height="141" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="ExitBtn_Click"/>
             </StackPanel>
