@@ -30,7 +30,7 @@ namespace ClientApp.ViewModel.Pages
             SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
 
             // Количество строк в базе данных
-            int count = DatabaseHandler.SelectQuery(ref connection, "statistics", "id").Count;
+            int count = DatabaseHandler.SelectQuery(ref connection, "statistics_table", "id").Count;
 
             // Список всех элементов
             ObservableCollection<StatisticsItem> list 
