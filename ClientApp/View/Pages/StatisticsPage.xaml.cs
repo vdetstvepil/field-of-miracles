@@ -32,5 +32,10 @@ namespace ClientApp.View.Pages
 
             _frame = frame;
         }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.GoBack();
+        }
     }
 }

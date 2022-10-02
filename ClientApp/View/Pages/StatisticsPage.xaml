@@ -13,39 +13,46 @@
             <Label Content="Статистика" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" 
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Separator Opacity="0" Height="10"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" MaxHeight="700">
+                <StackPanel Orientation="Horizontal" Width="510" VerticalAlignment="Center" >
+                    <!-- Имена -->
+                    <ItemsControl ItemsSource="{Binding StatisticsItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Width="200" VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
+                                    <Label Content="{Binding Name}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Separator Opacity="0" Width="2"/>
+                    <!-- Очки -->
+                    <ItemsControl ItemsSource="{Binding StatisticsItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
+                                    <Label Content="{Binding Sum}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+            
             <StackPanel Orientation="Horizontal" Width="510" VerticalAlignment="Center" >
-                <!-- Имена -->
-                <ItemsControl ItemsSource="{Binding StatisticsItems}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" Width="200" VerticalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
-                                <Label Content="{Binding Name}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Separator Opacity="0" Width="2"/>
-                <!-- Очки -->
-                <ItemsControl ItemsSource="{Binding StatisticsItems}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" Width="300" VerticalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="1" CornerRadius="10,10,10,10" Background="#4CFFFFFF">
-                                <Label Content="{Binding Sum}" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
             </StackPanel>
+            <!-- Кнопка "Выйти" -->
+            <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Назад" Height="85" Width="184" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,0" Click="ExitBtn_Click"/>
         </StackPanel>
         
     </Grid>
