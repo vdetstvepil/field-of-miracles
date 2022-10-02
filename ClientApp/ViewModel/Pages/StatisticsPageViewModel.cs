@@ -12,17 +12,29 @@ namespace ClientApp.ViewModel.Pages
 {
     public class StatisticsPageViewModel : Model.ViewModel
     {
-        ObservableCollection<StatisticsItem> _statisticsItems;
+        private ObservableCollection<StatisticsItem> _statisticsItems;
 
+        /// <summary>
+        /// Список элементов с именами и количеством очков
+        /// </summary>
+        public ObservableCollection<StatisticsItem> StatisticsItems { get => _statisticsItems; set => _statisticsItems = value; }
+
+        /// <summary>
+        /// Выгружает статистику из базы данных
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns>Отсортированный по убыванию список с количеством очков и именами</returns>
         public static ObservableCollection<StatisticsItem> UpdateStatistics(string fileName)
         {
             SQLiteConnection connection = new SQLiteConnection($"Data Source={fileName}; Version=3;");
 
-            // Выясняем колво строк
+            // Количество строк в базе данных
             int count = DatabaseHandler.SelectQuery(ref connection, "statistics", "id").Count;
 
+            // Список всех элементов
             ObservableCollection<StatisticsItem> list = new ObservableCollection<StatisticsItem>();
 
+            // Выгрузка статистики из базы данных
             for (int i = 0; i < count; i++)
             {
                 string name = DatabaseHandler.SelectQuery(ref connection, "statistics", "name", $"id == {i}")[0].ToString();
@@ -31,9 +43,18 @@ namespace ClientApp.ViewModel.Pages
                 list.Add(item);
             }
 
+            // Сортировка по убыванию по количеству очков
+            ObservableCollection<StatisticsItem> sortedList = (ObservableCollection<StatisticsItem>)list.OrderByDescending(p => Convert.ToInt32(p.Sum));
 
+            return sortedList;
+        }
 
-            return list;
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public StatisticsPageViewModel()
+        {
+            StatisticsItems = UpdateStatistics("questions.db");
         }
     }
 }
