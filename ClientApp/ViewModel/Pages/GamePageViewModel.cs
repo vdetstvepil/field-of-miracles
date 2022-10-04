@@ -149,7 +149,8 @@ namespace ClientApp.ViewModel.Pages
                     else
                     {
                         // Проиграли. Сделать соответствующее уведомление / экран
-                        MessageBox.Show("Ответ неверный");
+                        //MessageBox.Show("Ответ неверный");
+
                     }
                     break;
                 }
