@@ -55,9 +55,9 @@ namespace ClientApp.Model
             get
             {
                 if (IsFireproof)
-                    return (Brush)new BrushConverter().ConvertFrom("#FFFFFFFF");
+                    return (Brush)new BrushConverter().ConvertFrom("#FF5BFF6C"); 
                 else if (IsCurrent)
-                    return (Brush)new BrushConverter().ConvertFrom("#FF5BFF6C");
+                    return (Brush)new BrushConverter().ConvertFrom("#FFFFFFFF");
                 else 
                     return (Brush)new BrushConverter().ConvertFrom("#FFFF8B5B");
             } 
