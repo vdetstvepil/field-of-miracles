@@ -17,7 +17,7 @@
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,30" HorizontalAlignment="Center" >
             <Button x:Name="MenuBtn" Style="{DynamicResource RoundButton}" Content="Главное меню" Width="442" Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="PlayBtn_Click" />
-            <Separator Opacity="0" Width="100"/>
+            <Separator Opacity="0" Width="70"/>
             <Button x:Name="StatisticsBtn" Style="{DynamicResource RoundButton}" Content="Стастика" Width="442"  Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="PlayBtn_Click" />
         </StackPanel>
     </Grid>
