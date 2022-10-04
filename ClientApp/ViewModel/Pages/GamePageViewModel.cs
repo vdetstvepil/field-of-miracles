@@ -23,6 +23,8 @@ namespace ClientApp.ViewModel.Pages
         private int _fireproofAmount = 0;
         private string _question = "";
         private int _trueVariantNumber = 0;
+        private Visibility _endGameControlVisibility = Visibility.Collapsed;
+
         private ObservableCollection<Level> _levelItems = new ObservableCollection<Level>()
         {
             new Level(15, 3000000),
@@ -148,9 +150,8 @@ namespace ClientApp.ViewModel.Pages
                         CurrentLevel++;
                     else
                     {
-                        // Проиграли. Сделать соответствующее уведомление / экран
-                        //MessageBox.Show("Ответ неверный");
-
+                        // Вызов экрана конца игры
+                        EndGameControlVisibility = Visibility.Visible;
                     }
                     break;
                 }
@@ -251,11 +252,10 @@ namespace ClientApp.ViewModel.Pages
                     _currentLevel = value;
                     LoadQuestion();
                 }
-                if (_currentLevel == 16)
+                if (value == 16)
                 {
-                    MessageBox.Show("Вы победили");
-                    // Победа
-                    // Сделать соответствующий экран / уведомление
+                    // Вызов экрана конца игры
+                    EndGameControlVisibility = Visibility.Visible;
                 }
             }  
         }
@@ -279,5 +279,15 @@ namespace ClientApp.ViewModel.Pages
 
         // Список вопросов
         public List<Question> Questions { get => _questions; set => _questions = value; }
+
+        // Видимость _endGameControl
+        public Visibility EndGameControlVisibility
+        {
+            get => _endGameControlVisibility; set
+            {
+                _endGameControlVisibility = value;
+                OnPropertyChanged("EndGameControlVisibility");
+            }
+        }
     }
 }

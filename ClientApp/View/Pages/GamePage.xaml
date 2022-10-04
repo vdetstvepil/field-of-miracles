@@ -96,6 +96,6 @@
                 </StackPanel>
             </Grid>
         </DockPanel>
-        <eg:EndGame />
+        <eg:EndGame Visibility="{Binding EndGameControlVisibility, Mode=Default, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Page>
