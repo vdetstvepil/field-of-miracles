@@ -3,6 +3,7 @@ using ClientApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -16,52 +17,54 @@ namespace ClientApp.ViewModel.Pages
 {
     public class GamePageViewModel : Model.ViewModel
     {
+        public delegate void StartGameDelegate(int fireproofLevel);
+
         private int _score = 0;
         private int _currentLevel = 0;
         private bool _rightToMakeMistake = true;
         private bool _fiftyFifty = true;
         private int _fireproofLevel = 0;
-        private string _question = "";
+        private string _question = "Выберите на правой панели несгораемую сумму";
         private int _trueVariantNumber = 0;
         private Visibility _endGameControlVisibility = Visibility.Collapsed;
         private string _nickname = "";
 
-        private ObservableCollection<Level> _levelItems = new ObservableCollection<Level>()
-        {
-            new Level(15, 3000000),
-            new Level(14, 1500000),
-            new Level(13, 800000),
-            new Level(12, 400000),
-            new Level(11, 200000),
-            new Level(10, 100000),
-            new Level(9, 50000),
-            new Level(8, 25000),
-            new Level(7, 15000),
-            new Level(6, 10000),
-            new Level(5, 5000),
-            new Level(4, 3000),
-            new Level(3, 2000),
-            new Level(2, 1000),
-            new Level(1, 500),
-        };
+        private ObservableCollection<Level> _levelItems;
         private ObservableCollection<Variant> _variantItems = new ObservableCollection<Variant>()
         {
-           new Variant(VariantLetter.A, "Ответ А"),
-           new Variant(VariantLetter.B, "Ответ B"),
-           new Variant(VariantLetter.C, "Ответ C"),
-           new Variant(VariantLetter.D, "Ответ D", true),
+
         };
         List<Question> _questions = new List<Question>();
-
 
         public GamePageViewModel(string nickname)
         {
             OnPropertyChanged("ItemColor");
             OnPropertyChanged("Question");
 
-            Questions = GenerateQuestionList(DatabaseHandler.DatabaseFileName);
-            CurrentLevel = 1;
             NickName = nickname;
+            StartGameDelegate startGameDelegate = StartGame;
+
+            _levelItems = new ObservableCollection<Level>()
+            {
+                new Level(15, 3000000, startGameDelegate),
+                new Level(14, 1500000, startGameDelegate),
+                new Level(13, 800000, startGameDelegate),
+                new Level(12, 400000, startGameDelegate),
+                new Level(11, 200000, startGameDelegate),
+                new Level(10, 100000, startGameDelegate),
+                new Level(9, 50000, startGameDelegate),
+                new Level(8, 25000, startGameDelegate),
+                new Level(7, 15000, startGameDelegate),
+                new Level(6, 10000, startGameDelegate),
+                new Level(5, 5000, startGameDelegate),
+                new Level(4, 3000, startGameDelegate),
+                new Level(3, 2000, startGameDelegate),
+                new Level(2, 1000, startGameDelegate),
+                new Level(1, 500, startGameDelegate),
+            };
+
+            
+
         }
 
         /// <summary>
@@ -138,6 +141,19 @@ namespace ClientApp.ViewModel.Pages
         }
 
         /// <summary>
+        /// Начать игру
+        /// </summary>
+        /// <param name="fireproofLevel"></param>
+        private void StartGame(int fireproofLevel)
+        {
+            FireproofLevel = fireproofLevel;
+            Questions = GenerateQuestionList(DatabaseHandler.DatabaseFileName);
+            CurrentLevel = 1;
+            foreach (Level level in LevelItems)
+                level.IsEnabled = false;
+        }
+
+        /// <summary>
         /// Выбрать вариант ответа
         /// </summary>
         /// <param name="letter">Выбранный вариант</param>
@@ -161,7 +177,7 @@ namespace ClientApp.ViewModel.Pages
                         CurrentLevel++;
                     else
                     {
-                        if (CurrentLevel < FireproofLevel)
+                        if (CurrentLevel <= FireproofLevel)
                             Score = 0;
 
                         // Вызов экрана конца игры
@@ -274,6 +290,8 @@ namespace ClientApp.ViewModel.Pages
                 }
                 if (value == 16)
                 {
+                    _currentLevel++;
+
                     // Вызов экрана конца игры
                     EndGameControlVisibility = Visibility.Visible;
                     SaveResult();

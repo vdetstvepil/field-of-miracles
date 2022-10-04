@@ -43,6 +43,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
+                                <DockPanel.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding LevelClick}"></MouseBinding>
+                                </DockPanel.InputBindings>
                                 <Label Content="{Binding Number}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
                                 <Label Content="{Binding Sum}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                             </DockPanel>

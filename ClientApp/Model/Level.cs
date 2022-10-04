@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows;
 using System.Windows.Media;
+using static ClientApp.ViewModel.Pages.GamePageViewModel;
+using System.Windows.Navigation;
 
 namespace ClientApp.Model
 {
@@ -13,6 +17,8 @@ namespace ClientApp.Model
         private string _sum;
         private bool _isFireProof = false;
         private bool _isCurrent = false;
+        private StartGameDelegate _startGame;
+        private bool _isEnabled = true;
 
         /// <summary>
         /// Порядковый номер уровня
@@ -23,6 +29,18 @@ namespace ClientApp.Model
         /// Количество очков на данном уровне
         /// </summary>
         public string Sum { get { return _sum; } }  
+
+        /// <summary>
+        /// Кликабельность
+        /// </summary>
+        public bool IsEnabled 
+        { 
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+            }
+        }
 
         /// <summary>
         /// Несгораемая сумма
@@ -68,10 +86,35 @@ namespace ClientApp.Model
         /// </summary>
         /// <param name="number">Порядковый номер уровня</param>
         /// <param name="sum">Количество очков на данном уровне</param>
-        public Level(int number, int sum)
+        public Level(int number, int sum, StartGameDelegate startGameDelegate)
         {
             _number = number.ToString();
             _sum = sum.ToString();
+
+            LevelClick = new LambdaCommand(OnLevelClickExecuted, CanLevelClickExecute);
+            _startGame = startGameDelegate;
+        }
+
+        /// <summary>
+        /// Команда нажатия левой кнопкой мыши
+        /// </summary>
+        public ICommand LevelClick { get; set; }
+
+        /// <summary>
+        /// Проверочное условие на возможность нажатия
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private bool CanLevelClickExecute(object p) => _isEnabled;
+
+        /// <summary>
+        /// Действие при нажатии на элемент
+        /// </summary>
+        /// <param name="p"></param>
+        private void OnLevelClickExecuted(object p)
+        {
+            IsFireproof = true;
+            _startGame.Invoke(Int32.Parse(Number));
         }
     }
 }
