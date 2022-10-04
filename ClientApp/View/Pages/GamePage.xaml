@@ -43,6 +43,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="True">
+                                <DockPanel.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding LevelClick}"></MouseBinding>
+                                </DockPanel.InputBindings>
                                 <Label Content="{Binding Number}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" DockPanel.Dock="Left" />
                                 <Label Content="{Binding Sum}" Foreground="{Binding ItemColor, Mode=Default, UpdateSourceTrigger=PropertyChanged}" FontSize="48" FontFamily="Bahnschrift SemiBold" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
                             </DockPanel>
@@ -95,21 +98,23 @@
                 </StackPanel>
             </Grid>
         </DockPanel>
-        <Grid Visibility="{Binding EndGameControlVisibility, Mode=Default, UpdateSourceTrigger=PropertyChanged}" Background="#FF20203F" Width="1155" Height="461" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <!-- Текст: Конец игры! -->
-            <TextBlock TextWrapping="Wrap" Text="Конец игры! Ваш счёт:" Foreground="White" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,60,0,350" FontFamily="Bahnschrift"/>
+        <Grid Visibility="{Binding EndGameControlVisibility, Mode=Default, UpdateSourceTrigger=PropertyChanged}" Background="#19000000">
+            <Grid Background="#FF20203F" Width="1155" Height="461" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Текст: Конец игры! -->
+                <TextBlock TextWrapping="Wrap" Text="Конец игры! Ваш счёт:" Foreground="White" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,60,0,350" FontFamily="Bahnschrift"/>
 
-            <!-- Количество очков -->
-            <Grid Width="616" Height="86" VerticalAlignment="Center"  HorizontalAlignment="Center">
-                <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
-                <Label Content="{Binding Score}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
+                <!-- Количество очков -->
+                <Grid Width="616" Height="86" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                    <Border BorderThickness="1" CornerRadius="15,15,15,15" Background="#4CFFFFFF"/>
+                    <Label Content="{Binding Score}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="48" FontFamily="Bahnschrift SemiBold" Foreground="White" />
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,30" HorizontalAlignment="Center" >
+                    <Button x:Name="MenuBtn" Style="{DynamicResource RoundButton}" Content="Главное меню" Width="442" Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="MenuBtn_Click" />
+                    <Separator Opacity="0" Width="70"/>
+                    <Button x:Name="StatisticsBtn" Style="{DynamicResource RoundButton}" Content="Статистика" Width="442"  Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="StatisticsBtn_Click"  />
+                </StackPanel>
             </Grid>
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,30" HorizontalAlignment="Center" >
-                <Button x:Name="MenuBtn" Style="{DynamicResource RoundButton}" Content="Главное меню" Width="442" Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="MenuBtn_Click" />
-                <Separator Opacity="0" Width="70"/>
-                <Button x:Name="StatisticsBtn" Style="{DynamicResource RoundButton}" Content="Статистика" Width="442"  Height="85" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="StatisticsBtn_Click"  />
-            </StackPanel>
         </Grid>
     </Grid>
 </Page>

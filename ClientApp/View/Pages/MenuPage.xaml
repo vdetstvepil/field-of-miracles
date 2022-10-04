@@ -3,11 +3,10 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ClientApp"
+      xmlns:local="clr-namespace:ClientApp.ViewModel.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1200"
       Title="MenuPage">
-    
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="/millionare.png" Width="303" Height="345" HorizontalAlignment="Center"
@@ -21,7 +20,19 @@
                 <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти"  Height="141" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="72" FontFamily="Bahnschrift SemiBold" Click="ExitBtn_Click"/>
             </StackPanel>
         </StackPanel>
+        <Grid Background="#19000000" Visibility="{Binding InitGameControlVisibility, Mode=Default, UpdateSourceTrigger=PropertyChanged}">
+            <Grid  Background="#FF20203F" Width="1155" Height="461" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Текст: Введите имя -->
+                <TextBlock TextWrapping="Wrap" Text="Введите Ваше имя:" Foreground="White" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,60,0,350" FontFamily="Bahnschrift"/>
 
+                <TextBox x:Name="NickNameTextBox" Style="{DynamicResource CircleTextBox}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="849" 
+                 Height="86" BorderBrush="{x:Null}" Background="#4CFFFFFF" FontFamily="Bahnschrift" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" 
+                 VerticalContentAlignment="Center" Foreground="White"/>
 
+                <Button x:Name="ConfirmBtn" Style="{DynamicResource RoundButton}" Content="Подтвердить"  Height="85" Background="#4C8BFF55" Foreground="White" FontSize="48" 
+                FontFamily="Bahnschrift SemiBold" Width="508" VerticalAlignment="Bottom" Margin="0,0,0,40" Click="ConfirmBtn_Click" />
+
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

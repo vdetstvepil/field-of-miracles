@@ -56,7 +56,7 @@ namespace ClientApp.ViewModel.Pages
         /// </summary>
         public StatisticsPageViewModel()
         {
-            StatisticsItems = UpdateStatistics("questions.db");
+            StatisticsItems = UpdateStatistics(DatabaseHandler.DatabaseFileName);
         }
     }
 }
