@@ -25,9 +25,9 @@
                 <!-- Текст: Введите имя -->
                 <TextBlock TextWrapping="Wrap" Text="Введите Ваше имя:" Foreground="White" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,60,0,350" FontFamily="Bahnschrift"/>
 
-                <TextBox x:Name="Nickname" Style="{DynamicResource CircleTextBox}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="849" 
+                <TextBox x:Name="NickNameTextBox" Style="{DynamicResource CircleTextBox}" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="849" 
                  Height="86" BorderBrush="{x:Null}" Background="#4CFFFFFF" FontFamily="Bahnschrift" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" 
-                 VerticalContentAlignment="Center"/>
+                 VerticalContentAlignment="Center" Foreground="White"/>
 
                 <Button x:Name="ConfirmBtn" Style="{DynamicResource RoundButton}" Content="Подтвердить"  Height="85" Background="#4C8BFF55" Foreground="White" FontSize="48" 
                 FontFamily="Bahnschrift SemiBold" Width="508" VerticalAlignment="Bottom" Margin="0,0,0,40" Click="ConfirmBtn_Click" />

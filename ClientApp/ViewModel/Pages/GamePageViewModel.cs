@@ -24,6 +24,7 @@ namespace ClientApp.ViewModel.Pages
         private string _question = "";
         private int _trueVariantNumber = 0;
         private Visibility _endGameControlVisibility = Visibility.Collapsed;
+        private string _nickname = "";
 
         private ObservableCollection<Level> _levelItems = new ObservableCollection<Level>()
         {
@@ -53,13 +54,14 @@ namespace ClientApp.ViewModel.Pages
         List<Question> _questions = new List<Question>();
 
 
-        public GamePageViewModel()
+        public GamePageViewModel(string nickname)
         {
             OnPropertyChanged("ItemColor");
             OnPropertyChanged("Question");
 
             Questions = GenerateQuestionList("questions.db");
             CurrentLevel = 1;
+            NickName = nickname;
         }
 
         /// <summary>
@@ -296,6 +298,13 @@ namespace ClientApp.ViewModel.Pages
                 _endGameControlVisibility = value;
                 OnPropertyChanged("EndGameControlVisibility");
             }
+        }
+
+        // Никнейм
+        public string NickName
+        {
+            get => _nickname;
+            set => _nickname = value;
         }
     }
 }

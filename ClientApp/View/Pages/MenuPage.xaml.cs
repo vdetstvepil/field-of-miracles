@@ -49,7 +49,7 @@ namespace ClientApp
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            _frame.NavigationService.Navigate(new GamePage(_frame));
+            _frame.NavigationService.Navigate(new GamePage(_frame, NickNameTextBox.Text));
         }
     }
 }
