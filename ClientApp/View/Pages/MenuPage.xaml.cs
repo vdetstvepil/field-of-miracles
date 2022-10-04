@@ -1,4 +1,5 @@
 ﻿using ClientApp.View.Pages;
+using ClientApp.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace ClientApp
         public MenuPage(Frame frame)
         {
             InitializeComponent();
+            DataContext = new MenuPageViewModel();
             _frame = frame;
         }
 
@@ -37,12 +39,17 @@ namespace ClientApp
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
-            _frame.NavigationService.Navigate(new GamePage(_frame));
+            ((MenuPageViewModel)DataContext).InitGameControlVisibility = Visibility.Visible;
         }
 
         private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
         {
             _frame.NavigationService.Navigate(new StatisticsPage(_frame));
+        }
+
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.Navigate(new GamePage(_frame));
         }
     }
 }

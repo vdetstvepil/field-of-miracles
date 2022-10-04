@@ -82,12 +82,10 @@
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Variant.cs" />
     <Compile Include="Model\VariantLetter.cs" />
+    <Compile Include="ViewModel\Pages\MenuPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\StatisticsPageViewModel.cs" />
     <Compile Include="View\Pages\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UserControls\InputName.xaml.cs">
-      <DependentUpon>InputName.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Pages\GamePage.xaml">
       <SubType>Designer</SubType>
@@ -115,10 +113,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\StatisticsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\InputName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\GameControls\" />
+    <Folder Include="View\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bg.png" />
