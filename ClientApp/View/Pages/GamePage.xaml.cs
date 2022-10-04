@@ -1,4 +1,5 @@
 ﻿using ClientApp.Model;
+using ClientApp.View.Pages;
 using ClientApp.ViewModel.Pages;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,17 @@ namespace ClientApp
         private void FiftyFiftyBtn_Click(object sender, RoutedEventArgs e)
         {
             ((GamePageViewModel)DataContext).RemoveTwoVariants();
+        }
+
+        private void MenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.GoBack();
+        }
+
+        private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _frame.NavigationService.GoBack();
+            _frame.NavigationService.Navigate(new StatisticsPage(_frame));
         }
     }
 }

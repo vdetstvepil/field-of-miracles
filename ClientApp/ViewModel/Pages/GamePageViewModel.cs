@@ -20,7 +20,7 @@ namespace ClientApp.ViewModel.Pages
         private int _currentLevel = 0;
         private bool _rightToMakeMistake = true;
         private bool _fiftyFifty = true;
-        private int _fireproofAmount = 0;
+        private int _fireproofLevel = 0;
         private string _question = "";
         private int _trueVariantNumber = 0;
         private Visibility _endGameControlVisibility = Visibility.Collapsed;
@@ -150,6 +150,9 @@ namespace ClientApp.ViewModel.Pages
                         CurrentLevel++;
                     else
                     {
+                        if (CurrentLevel < FireproofLevel)
+                            Score = 0;
+
                         // Вызов экрана конца игры
                         EndGameControlVisibility = Visibility.Visible;
                     }
@@ -175,7 +178,12 @@ namespace ClientApp.ViewModel.Pages
             OnPropertyChanged("ItemColor");
 
             // Показываем текущую сумму
-            Score = Convert.ToInt32(LevelItems[15 - CurrentLevel].Sum);
+            if (15 - CurrentLevel + 1 < 15)
+            {
+                Score = Convert.ToInt32(LevelItems[15 - CurrentLevel + 1].Sum);
+            }
+            else Score = 0;
+           
         }
 
         /// <summary>
@@ -275,7 +283,7 @@ namespace ClientApp.ViewModel.Pages
         }
 
         // Несгораемая сумма
-        public int FireproofAmount { get => _fireproofAmount; set => _fireproofAmount = value; }
+        public int FireproofLevel { get => _fireproofLevel; set => _fireproofLevel = value; }
 
         // Список вопросов
         public List<Question> Questions { get => _questions; set => _questions = value; }
