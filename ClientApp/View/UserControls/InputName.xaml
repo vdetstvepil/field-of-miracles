@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClientApp.View.UserControls"
-             mc:Ignorable="d" 
              mc:Ignorable="d" Height="481" Width="1175" Background="Black">
     <Grid Background="#FF20203F" Width="1155" Height="461" HorizontalAlignment="Center" VerticalAlignment="Center">
         <!-- Текст: Введите имя -->
