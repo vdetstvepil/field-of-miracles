@@ -180,7 +180,7 @@ namespace ClientApp.Services
             commandBuilder.Append('(');
             for (int i = 0; i < fields.Length; i++)
                 commandBuilder.Append($"{fields[i]}, ");
-            commandBuilder.Remove(commandBuilder.Length - 2, 1);
+            commandBuilder.Remove(commandBuilder.Length - 2, 2);
             commandBuilder.Append(')');
 
             commandBuilder.Append(" VALUES ");
@@ -188,8 +188,8 @@ namespace ClientApp.Services
             // Перечисляем в строке запроса значения
             commandBuilder.Append('(');
             for (int i = 0; i < fields.Length; i++)
-                commandBuilder.Append($"{values[i]}, ");
-            commandBuilder.Remove(commandBuilder.Length - 2, 1);
+                commandBuilder.Append($"\"{values[i]}\", ");
+            commandBuilder.Remove(commandBuilder.Length - 2, 2);
             commandBuilder.Append(')');
 
             // Команда запроса

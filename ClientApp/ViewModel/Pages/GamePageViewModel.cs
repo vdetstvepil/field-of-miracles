@@ -59,7 +59,7 @@ namespace ClientApp.ViewModel.Pages
             OnPropertyChanged("ItemColor");
             OnPropertyChanged("Question");
 
-            Questions = GenerateQuestionList("questions.db");
+            Questions = GenerateQuestionList(DatabaseHandler.DatabaseFileName);
             CurrentLevel = 1;
             NickName = nickname;
         }
@@ -129,6 +129,15 @@ namespace ClientApp.ViewModel.Pages
         }
 
         /// <summary>
+        /// Сохранение результата в базу данных
+        /// </summary>
+        private void SaveResult()
+        {
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={DatabaseHandler.DatabaseFileName}; Version=3;");
+            DatabaseHandler.InsertQuery(ref connection, "statistics_table", new string[] { "nickname", "score" }, new string[] { NickName, Score.ToString() });
+        }
+
+        /// <summary>
         /// Выбрать вариант ответа
         /// </summary>
         /// <param name="letter">Выбранный вариант</param>
@@ -157,6 +166,7 @@ namespace ClientApp.ViewModel.Pages
 
                         // Вызов экрана конца игры
                         EndGameControlVisibility = Visibility.Visible;
+                        SaveResult();
                     }
                     break;
                 }
@@ -266,6 +276,7 @@ namespace ClientApp.ViewModel.Pages
                 {
                     // Вызов экрана конца игры
                     EndGameControlVisibility = Visibility.Visible;
+                    SaveResult();
                 }
             }  
         }
