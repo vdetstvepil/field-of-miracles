@@ -21,22 +21,9 @@ namespace ClientApp.View.UserControls
     /// </summary>
     public partial class EndGame : UserControl
     {
-        private Frame _frame;
-
-        public EndGame(Frame frame)
+        public EndGame()
         {
             InitializeComponent();
-            _frame = frame;
-        }
-
-        private void PlayBtn_Click(object sender, RoutedEventArgs e)
-        {
-            _frame.NavigationService.Navigate(new MenuPage(_frame));
-        }
-
-        private void StatisticsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            _frame.NavigationService.Navigate(new StatisticsPage(_frame));
         }
     }
 }

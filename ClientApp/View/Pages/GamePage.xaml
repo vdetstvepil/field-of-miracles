@@ -10,7 +10,6 @@
       Title="GamePage">
 
     <Grid>
-        <eg:/>
         <DockPanel LastChildFill="True">
             <!-- Левая панель -->
             <Grid DockPanel.Dock="Left" Width="300" Margin="0,50,0,50">
@@ -97,5 +96,6 @@
                 </StackPanel>
             </Grid>
         </DockPanel>
+        <eg:EndGame />
     </Grid>
 </Page>
