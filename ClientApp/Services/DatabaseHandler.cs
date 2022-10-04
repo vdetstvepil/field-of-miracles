@@ -19,6 +19,11 @@ namespace ClientApp.Services
         /// </summary>
         public SQLiteConnection Connection { get; set; }
 
+        /// <summary>
+        /// Название файла БД
+        /// </summary>
+        public static string DatabaseFileName { get; set; } = "questions.db";
+
 
         /// <summary>
         /// Инициировать подключение к базе данных
@@ -156,6 +161,45 @@ namespace ClientApp.Services
             ConnectionClose(ref connection);
 
             return listOfValues;
+        }
+
+        /// <summary>
+        /// Запрос INSERT
+        /// </summary>
+        /// <param name="query">Строка единичного запроса</param>
+        /// <returns></returns>
+        public static bool InsertQuery(ref SQLiteConnection connection, string table, string[] fields, string[] values)
+        {
+            ConnectionOpen(ref connection);
+
+            // Строим строку запроса
+            StringBuilder commandBuilder = new StringBuilder();
+            commandBuilder.Append($"INSERT INTO {table}");
+
+            // Перечисляем в строке запроса поля
+            commandBuilder.Append('(');
+            for (int i = 0; i < fields.Length; i++)
+                commandBuilder.Append($"{fields[i]}, ");
+            commandBuilder.Remove(commandBuilder.Length - 2, 1);
+            commandBuilder.Append(')');
+
+            commandBuilder.Append(" VALUES ");
+
+            // Перечисляем в строке запроса значения
+            commandBuilder.Append('(');
+            for (int i = 0; i < fields.Length; i++)
+                commandBuilder.Append($"{values[i]}, ");
+            commandBuilder.Remove(commandBuilder.Length - 2, 1);
+            commandBuilder.Append(')');
+
+            // Команда запроса
+            SQLiteCommand command = new SQLiteCommand(commandBuilder.ToString(), connection);
+
+            command.ExecuteNonQuery();
+           
+            ConnectionClose(ref connection);
+
+            return true;
         }
     }
 }
