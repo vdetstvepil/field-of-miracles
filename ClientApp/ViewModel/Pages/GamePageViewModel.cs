@@ -23,7 +23,6 @@ namespace ClientApp.ViewModel.Pages
         // Локальные переменные
         private int _score;
         private int _currentLevel;
-        private bool _rightToMakeMistake;
         private bool _fiftyFifty;
         private int _fireproofLevel;
         private string _question;
@@ -46,7 +45,6 @@ namespace ClientApp.ViewModel.Pages
             // Инициализация переменных
             _score = 0;
             _currentLevel = 0;
-            _rightToMakeMistake = true;
             _fiftyFifty = true;
             _fireproofLevel = 0;
             _question = "Выберите на правой панели несгораемую сумму";
@@ -343,14 +341,7 @@ namespace ClientApp.ViewModel.Pages
             }  
         }
 
-        /// <summary>
-        /// Право на ошибку
-        /// </summary>
-        public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
-
-        /// <summary>
-        /// 50:50
-        /// </summary>
+        // 50:50
         public bool FiftyFifty 
         { 
             get => _fiftyFifty; 

@@ -25,7 +25,7 @@
                     <Button x:Name="FiftyFiftyBtn" Style="{DynamicResource CircleButton}" Content="50:50" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" Click="FiftyFiftyBtn_Click" IsEnabled="{Binding FiftyFifty, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
                     <Separator Opacity="0" Height="10"/>
                     <!-- Опция "Право на ошибку" -->
-                    <Button Style="{DynamicResource CircleButton}" Content="×2" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
+                    <Button Style="{DynamicResource CircleButton}" Visibility="Hidden" Content="×2" Height="85" Width="184" Background="#4CFFFFFF" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" />
                 </StackPanel>
                 <!-- Кнопка "Выйти" -->
                 <Button x:Name="ExitBtn" Style="{DynamicResource RoundButton}" Content="Выйти" Height="85" Width="184" Background="#4CFF0000" BorderBrush="#00707070" Foreground="White" FontSize="48" FontFamily="Bahnschrift SemiBold" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" Click="ExitBtn_Click"/>
