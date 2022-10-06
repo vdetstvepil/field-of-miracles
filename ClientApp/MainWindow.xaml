@@ -14,7 +14,6 @@
         <Image Source="/bg.png" Stretch="Fill" />
         <DockPanel>
             <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden"/>
-            
         </DockPanel>
     </Grid>
 </Window>

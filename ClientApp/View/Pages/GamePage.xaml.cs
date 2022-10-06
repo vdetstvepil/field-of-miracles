@@ -25,14 +25,13 @@ namespace ClientApp
     {
         private Frame _frame;
 
-        public GamePage(Frame frame)
+        public GamePage(Frame frame, string nickname)
         {
             InitializeComponent();
+            _frame = frame;
 
             // Присваиваем ссылку на ViewModel DataContext'у
-            DataContext = new GamePageViewModel();
-
-            _frame = frame;
+            DataContext = new GamePageViewModel(nickname);
         }
 
         private void VariantBtn_Click(object sender, RoutedEventArgs e)

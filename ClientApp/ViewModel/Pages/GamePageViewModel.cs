@@ -3,6 +3,7 @@ using ClientApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ClientApp.ViewModel.Pages
 {
     public class GamePageViewModel : Model.ViewModel
     {
+<<<<<<< HEAD
         private int _score = 0;
         private int _currentLevel = 0;
         private bool _fiftyFifty = true;
@@ -50,15 +52,64 @@ namespace ClientApp.ViewModel.Pages
            new Variant(VariantLetter.D, "Ответ D", true),
         };
         List<Question> _questions = new List<Question>();
+=======
+        // Делегаты
+        public delegate void StartGameDelegate(int fireproofLevel);
 
+        // Локальные переменные
+        private int _score;
+        private int _currentLevel;
+        private bool _rightToMakeMistake;
+        private bool _fiftyFifty;
+        private int _fireproofLevel;
+        private string _question;
+        private int _trueVariantNumber;
+        private Visibility _endGameControlVisibility;
+        private string _nickname;
+        private ObservableCollection<Level> _levelItems;
+        private ObservableCollection<Variant> _variantItems;
+        List<Question> _questions;
+>>>>>>> 6d555567ffd22e454d2198f8db60621fc71c3b84
 
-        public GamePageViewModel()
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="nickname"></param>
+        public GamePageViewModel(string nickname)
         {
-            OnPropertyChanged("ItemColor");
-            OnPropertyChanged("Question");
+            // Инициализация делегатов
+            StartGameDelegate startGameDelegate = StartGame;
 
-            Questions = GenerateQuestionList("questions.db");
-            CurrentLevel = 1;
+            // Инициализация переменных
+            _score = 0;
+            _currentLevel = 0;
+            _rightToMakeMistake = true;
+            _fiftyFifty = true;
+            _fireproofLevel = 0;
+            _question = "Выберите на правой панели несгораемую сумму";
+            _trueVariantNumber = 0;
+            _endGameControlVisibility = Visibility.Collapsed;
+            _nickname = nickname;
+            _levelItems = new ObservableCollection<Level>()
+            {
+                new Level(15, 3000000, startGameDelegate),
+                new Level(14, 1500000, startGameDelegate),
+                new Level(13, 800000, startGameDelegate),
+                new Level(12, 400000, startGameDelegate),
+                new Level(11, 200000, startGameDelegate),
+                new Level(10, 100000, startGameDelegate),
+                new Level(9, 50000, startGameDelegate),
+                new Level(8, 25000, startGameDelegate),
+                new Level(7, 15000, startGameDelegate),
+                new Level(6, 10000, startGameDelegate),
+                new Level(5, 5000, startGameDelegate),
+                new Level(4, 3000, startGameDelegate),
+                new Level(3, 2000, startGameDelegate),
+                new Level(2, 1000, startGameDelegate),
+                new Level(1, 500, startGameDelegate),
+            };
+            _variantItems = new ObservableCollection<Variant>();
+            _questions = new List<Question>();
         }
 
         /// <summary>
@@ -77,7 +128,7 @@ namespace ClientApp.ViewModel.Pages
 
             for (int i = 1; i <= 15; i++)
             {
-                // Берем рандомный вопрос по уровню
+                // Берем рандомный вопрос по уровню и добавляем его в список
                 List<object> questionContentItems =
                     DatabaseHandler.SelectQuery(ref connection, "questions", "id", $"level_number == {i}");
                 int questionId = Convert.ToInt32(questionContentItems[random.Next(0, questionContentItems.Count)]);
@@ -126,11 +177,47 @@ namespace ClientApp.ViewModel.Pages
         }
 
         /// <summary>
+        /// Сохранение результата в базу данных
+        /// </summary>
+        private void SaveResult()
+        {
+            // Создаем подключение к базе данных
+            SQLiteConnection connection = new SQLiteConnection($"Data Source={DatabaseHandler.DatabaseFileName}; Version=3;");
+
+            // Выполняем запрос вставки значений в статистику
+            DatabaseHandler.InsertQuery(ref connection, "statistics_table", 
+                new string[] { "nickname", "score" }, 
+                new string[] { NickName, Score.ToString() });
+        }
+
+        /// <summary>
+        /// Начать игру
+        /// </summary>
+        /// <param name="fireproofLevel"></param>
+        private void StartGame(int fireproofLevel)
+        {
+            // Получаем на вход уровень, на котором будет
+            // получена несгораемая сумма
+            FireproofLevel = fireproofLevel;
+
+            // Генерируем лист вопросов
+            Questions = GenerateQuestionList(DatabaseHandler.DatabaseFileName);
+
+            // Текущий уровень - первый
+            CurrentLevel = 1;
+
+            // Выключаем возможность нажатия на уровни
+            foreach (Level level in LevelItems)
+                level.IsEnabled = false;
+        }
+
+        /// <summary>
         /// Выбрать вариант ответа
         /// </summary>
         /// <param name="letter">Выбранный вариант</param>
         public void ChooseVariant(VariantLetter letter)
         {
+            // Выделение нажатого варианта ответа
             foreach (var item in _variantItems)
                 if (item.Letter == letter)
                     item.IsChecked = true;
@@ -149,11 +236,20 @@ namespace ClientApp.ViewModel.Pages
                         CurrentLevel++;
                     else
                     {
-                        if (CurrentLevel < FireproofLevel)
+                        // Если уровень несгораемой суммы еще не был
+                        // пройдет, то выигрыш будет нулевым. Иначе
+                        // выигрыш будет равняться несгораемой сумме.
+                        if (CurrentLevel <= FireproofLevel)
                             Score = 0;
+                        else foreach (Level level in LevelItems)
+                                if (level.IsFireproof)
+                                    Score = Int32.Parse(level.Sum);
 
-                        // Вызов экрана конца игры
+                        // Показываем экран окончания игры с результатом
                         EndGameControlVisibility = Visibility.Visible;
+
+                        // Сохраняем результат
+                        SaveResult();
                     }
                     break;
                 }
@@ -178,9 +274,7 @@ namespace ClientApp.ViewModel.Pages
 
             // Показываем текущую сумму
             if (15 - CurrentLevel + 1 < 15)
-            {
                 Score = Convert.ToInt32(LevelItems[15 - CurrentLevel + 1].Sum);
-            }
             else Score = 0;
            
         }
@@ -222,22 +316,34 @@ namespace ClientApp.ViewModel.Pages
         }
        
 
-        // Список вариантов ответа
+        /// <summary>
+        /// Список вариантов ответа
+        /// </summary>
         public List<string> AnswerVariantItems { get; set; }
 
-        // Список уровней
+        /// <summary>
+        /// Список уровней
+        /// </summary>
         public ObservableCollection<Level> LevelItems { get => _levelItems; set => _levelItems = value; }
 
-        // Список уровней
+        /// <summary>
+        /// Список уровней
+        /// </summary>
         public ObservableCollection<Variant> VariantItems { get => _variantItems; set => _variantItems = value; }
 
-        // Правильный ответ
+        /// <summary>
+        /// Правильный ответ
+        /// </summary>
         public int TrueVariantNumber { get => _trueVariantNumber; set => _trueVariantNumber = value; }
 
-        // Текущий вопрос
+        /// <summary>
+        /// Текущий вопрос
+        /// </summary>
         public string Question { get => _question; set => _question = value; }
 
-        // Количество очков
+        /// <summary>
+        /// Количество очков
+        /// </summary>
         public int Score 
         { 
             get => _score;
@@ -248,7 +354,9 @@ namespace ClientApp.ViewModel.Pages
             }
         }
 
-        // Текущая ступень
+        /// <summary>
+        /// Текущая ступень
+        /// </summary>
         public int CurrentLevel 
         { 
             get => _currentLevel; 
@@ -261,13 +369,29 @@ namespace ClientApp.ViewModel.Pages
                 }
                 if (value == 16)
                 {
-                    // Вызов экрана конца игры
+                    _currentLevel++;
+
+                    // Показываем экран окончания игры с результатом
                     EndGameControlVisibility = Visibility.Visible;
+
+                    // Сохраняем результат
+                    SaveResult();
                 }
             }  
         }
 
+<<<<<<< HEAD
         // 50:50
+=======
+        /// <summary>
+        /// Право на ошибку
+        /// </summary>
+        public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
+
+        /// <summary>
+        /// 50:50
+        /// </summary>
+>>>>>>> 6d555567ffd22e454d2198f8db60621fc71c3b84
         public bool FiftyFifty 
         { 
             get => _fiftyFifty; 
@@ -278,13 +402,19 @@ namespace ClientApp.ViewModel.Pages
             }
         }
 
-        // Несгораемая сумма
+        /// <summary>
+        /// Несгораемая сумма
+        /// </summary>
         public int FireproofLevel { get => _fireproofLevel; set => _fireproofLevel = value; }
 
-        // Список вопросов
+        /// <summary>
+        /// Список вопросов
+        /// </summary>
         public List<Question> Questions { get => _questions; set => _questions = value; }
 
-        // Видимость _endGameControl
+        /// <summary>
+        /// Видимость _endGameControl
+        /// </summary>
         public Visibility EndGameControlVisibility
         {
             get => _endGameControlVisibility; set
@@ -292,6 +422,15 @@ namespace ClientApp.ViewModel.Pages
                 _endGameControlVisibility = value;
                 OnPropertyChanged("EndGameControlVisibility");
             }
+        }
+
+        /// <summary>
+        /// Никнейм
+        /// </summary>
+        public string NickName
+        {
+            get => _nickname;
+            set => _nickname = value;
         }
     }
 }
