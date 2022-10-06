@@ -18,7 +18,6 @@ namespace ClientApp.ViewModel.Pages
     {
         private int _score = 0;
         private int _currentLevel = 0;
-        private bool _rightToMakeMistake = true;
         private bool _fiftyFifty = true;
         private int _fireproofLevel = 0;
         private string _question = "";
@@ -267,9 +266,6 @@ namespace ClientApp.ViewModel.Pages
                 }
             }  
         }
-
-        // Право на ошибку
-        public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
 
         // 50:50
         public bool FiftyFifty 
