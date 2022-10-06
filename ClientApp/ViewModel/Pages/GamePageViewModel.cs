@@ -17,42 +17,6 @@ namespace ClientApp.ViewModel.Pages
 {
     public class GamePageViewModel : Model.ViewModel
     {
-<<<<<<< HEAD
-        private int _score = 0;
-        private int _currentLevel = 0;
-        private bool _fiftyFifty = true;
-        private int _fireproofLevel = 0;
-        private string _question = "";
-        private int _trueVariantNumber = 0;
-        private Visibility _endGameControlVisibility = Visibility.Collapsed;
-
-        private ObservableCollection<Level> _levelItems = new ObservableCollection<Level>()
-        {
-            new Level(15, 3000000),
-            new Level(14, 1500000),
-            new Level(13, 800000),
-            new Level(12, 400000),
-            new Level(11, 200000),
-            new Level(10, 100000),
-            new Level(9, 50000),
-            new Level(8, 25000),
-            new Level(7, 15000),
-            new Level(6, 10000),
-            new Level(5, 5000),
-            new Level(4, 3000),
-            new Level(3, 2000),
-            new Level(2, 1000),
-            new Level(1, 500),
-        };
-        private ObservableCollection<Variant> _variantItems = new ObservableCollection<Variant>()
-        {
-           new Variant(VariantLetter.A, "Ответ А"),
-           new Variant(VariantLetter.B, "Ответ B"),
-           new Variant(VariantLetter.C, "Ответ C"),
-           new Variant(VariantLetter.D, "Ответ D", true),
-        };
-        List<Question> _questions = new List<Question>();
-=======
         // Делегаты
         public delegate void StartGameDelegate(int fireproofLevel);
 
@@ -69,7 +33,6 @@ namespace ClientApp.ViewModel.Pages
         private ObservableCollection<Level> _levelItems;
         private ObservableCollection<Variant> _variantItems;
         List<Question> _questions;
->>>>>>> 6d555567ffd22e454d2198f8db60621fc71c3b84
 
         /// <summary>
         /// Конструктор
@@ -380,18 +343,9 @@ namespace ClientApp.ViewModel.Pages
             }  
         }
 
-<<<<<<< HEAD
-        // 50:50
-=======
-        /// <summary>
-        /// Право на ошибку
-        /// </summary>
-        public bool RightToMakeMistake { get => _rightToMakeMistake; set => _rightToMakeMistake = value; }
-
         /// <summary>
         /// 50:50
         /// </summary>
->>>>>>> 6d555567ffd22e454d2198f8db60621fc71c3b84
         public bool FiftyFifty 
         { 
             get => _fiftyFifty; 
