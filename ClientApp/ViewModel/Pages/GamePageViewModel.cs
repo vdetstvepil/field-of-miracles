@@ -23,7 +23,6 @@ namespace ClientApp.ViewModel.Pages
         // Локальные переменные
         private int _score;
         private int _currentLevel;
-        private bool _rightToMakeMistake;
         private bool _fiftyFifty;
         private int _fireproofLevel;
         private string _question;
@@ -343,9 +342,7 @@ namespace ClientApp.ViewModel.Pages
             }  
         }
 
-        /// <summary>
-        /// 50:50
-        /// </summary>
+        // 50:50
         public bool FiftyFifty 
         { 
             get => _fiftyFifty; 
